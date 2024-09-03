@@ -67,7 +67,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   }, []);
 
   // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  const renderRoutes = routes.map(({ type, name,  icon, title, noCollapse, key, route, href }) => {
     let returnValue;
 
     if (type === "collapse") {
@@ -212,14 +212,14 @@ function Sidenav({ color, brandName, routes, ...rest }) {
         <VuiBox mt={2}>
           <VuiButton
             component="a"
-            href="https://creative-tim.com/product/vision-ui-dashboard-pro-react"
+            href=""
             target="_blank"
             rel="noreferrer"
             variant="gradient"
             color={color}
             fullWidth
           >
-            Upgrade to PRO
+            Enjoying Vida Sphera?
           </VuiButton>
         </VuiBox>
       </VuiBox>
