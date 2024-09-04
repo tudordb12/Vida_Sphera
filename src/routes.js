@@ -31,6 +31,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
+
 // Vision UI Dashboard React icons
 import { IoRocketSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
@@ -39,6 +40,7 @@ import { IoBuild } from "react-icons/io5";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
+import { MdAssistant } from "react-icons/md";
 
 const routes = [
   {
@@ -50,7 +52,6 @@ const routes = [
     component: Dashboard,
     noCollapse: true,
   },
-  
   {
     type: "collapse",
     name: "Tables",
@@ -69,7 +70,15 @@ const routes = [
     component: Billing,
     noCollapse: true,
   },
-  
+  {
+    type: "collapse",
+    name: "Assistant",
+    key: "assistant",
+    route: "/billing",
+    icon: <MdAssistant size="15px" color="inherit" />,
+    component: Billing,
+    noCollapse: true,
+  },
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",

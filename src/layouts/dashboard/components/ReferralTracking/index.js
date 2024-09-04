@@ -116,7 +116,7 @@ function ReferralTracking() {
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
 						<CircularProgress
 							variant='determinate'
-							value={70}
+							value={85}
 							size={window.innerWidth >= 1024 ? 200 : window.innerWidth >= 768 ? 170 : 200}
 							color='success'
 						/>

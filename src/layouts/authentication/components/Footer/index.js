@@ -32,7 +32,7 @@ function Footer() {
             sx={{ textAlign: "center", fontWeight: "400 !important" }}
             color="text"
           >
-            @ 2021, Made with ❤️&nbsp;&nbsp;&nbsp; by{" "}
+            @ 2024 &nbsp; {""}
             <VuiTypography
               component="a"
               variant="button"
@@ -41,7 +41,7 @@ function Footer() {
               color="text"
               mr="2px"
             >
-              Simmmple
+              VIDA SPHERA
             </VuiTypography>
             &
             <VuiTypography
@@ -53,9 +53,9 @@ function Footer() {
               sx={{ textAlign: "center", fontWeight: "500 !important" }}
               color="text"
             >
-              Creative Tim
+            Einsaft
             </VuiTypography>
-            for a better web
+            
           </VuiTypography>
         </Grid>
         <Grid item xs={10}>
