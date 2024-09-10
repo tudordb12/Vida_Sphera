@@ -26,6 +26,7 @@
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
+import Home from "layouts/home";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
@@ -74,9 +75,9 @@ const routes = [
     type: "collapse",
     name: "Assistant",
     key: "assistant",
-    route: "/billing",
+    route: "/home",
     icon: <MdAssistant size="15px" color="inherit" />,
-    component: Billing,
+    component: Home,
     noCollapse: true,
   },
   { type: "title", title: "Account Pages", key: "account-pages" },
