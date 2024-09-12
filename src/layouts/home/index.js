@@ -80,7 +80,7 @@ function Home() {
           <Grid container spacing={3} justifyContent="center" alignItems="center">
             <Grid item xs={0} md={0} xl={0}>
               <VuiTypography variant="h1" color="light">
-                V I D A S P H E R E
+                V I D A S P H E R A
               </VuiTypography>
             </Grid>
           </Grid>
