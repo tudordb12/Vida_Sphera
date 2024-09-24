@@ -1,9 +1,7 @@
 
-
 import { useState } from "react";
-
-// react-router-dom components
 import { Link } from "react-router-dom";
+import { doSignInWithEmailAndPassword } from "../../../firebase/auth";  // Import Firebase sign-in method
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -23,11 +21,31 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import bgSignIn from "assets/images/signInImage.png";
+import bgSignIn2 from "assets/images/backdrop.avif"
 
 function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
+  const [error, setError] = useState(null);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const handleSignIn = async () => {
+    setError(null);  // Reset any previous errors
+    setLoginSuccess(false);  // Reset login success state
+
+    try {
+      // Call Firebase auth function
+      await doSignInWithEmailAndPassword(email, password);
+      setLoginSuccess(true);  // Set login success message
+      window.location.href = "/dashboard";
+
+    } catch (error) {
+      setError(error.message);  // Set error message
+    }
+  };
 
   return (
     <CoverLayout
@@ -36,9 +54,10 @@ function SignIn() {
       description="Enter your email and password to sign in"
       premotto="PERSONAL HEALTH TO THE NEXT LEVEL"
       motto="VIDA SPHERA"
-      image={bgSignIn}
+      image={bgSignIn2}
     >
       <VuiBox component="form" role="form">
+        {/* Email Input */}
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
@@ -55,9 +74,17 @@ function SignIn() {
               palette.gradients.borderLight.angle
             )}
           >
-            <VuiInput type="email" placeholder="Your email..." fontWeight="500" />
+            <VuiInput
+              type="email"
+              placeholder="Your email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}  // Capture email input
+              fontWeight="500"
+            />
           </GradientBorder>
         </VuiBox>
+
+        {/* Password Input */}
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
@@ -77,12 +104,16 @@ function SignIn() {
             <VuiInput
               type="password"
               placeholder="Your password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}  // Capture password input
               sx={({ typography: { size } }) => ({
                 fontSize: size.sm,
               })}
             />
           </GradientBorder>
         </VuiBox>
+
+        {/* Remember Me Switch */}
         <VuiBox display="flex" alignItems="center">
           <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
           <VuiTypography
@@ -95,11 +126,27 @@ function SignIn() {
             &nbsp;&nbsp;&nbsp;&nbsp;Remember me
           </VuiTypography>
         </VuiBox>
+
+        {/* Error and Success Notifications */}
+        {error && (
+          <VuiTypography color="error" fontWeight="bold" textAlign="center" mt={2}>
+            {error}
+          </VuiTypography>
+        )}
+        {loginSuccess && (
+          <VuiTypography color="success" fontWeight="bold" textAlign="center" mt={2}>
+            Login successful!
+          </VuiTypography>
+        )}
+
+        {/* Sign In Button */}
         <VuiBox mt={4} mb={1}>
-          <VuiButton color="info" fullWidth>
+          <VuiButton color="info" fullWidth onClick={handleSignIn}>
             SIGN IN
           </VuiButton>
         </VuiBox>
+
+        {/* Redirect to Sign Up */}
         <VuiBox mt={3} textAlign="center">
           <VuiTypography variant="button" color="text" fontWeight="regular">
             Don&apos;t have an account?{" "}

@@ -1,11 +1,11 @@
+// src/layouts/authentication/sign-up/index.js
+
 
 
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { doCreateUserWithEmailAndPassword } from "../../../firebase/auth";  // Correct import from auth.js
 
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
 import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
@@ -21,22 +21,37 @@ import VuiButton from "components/VuiButton";
 import VuiSwitch from "components/VuiSwitch";
 import GradientBorder from "examples/GradientBorder";
 
+
+import rgba from "assets/theme/functions/rgba";
+
+
 // Vision UI Dashboard assets
 import radialGradient from "assets/theme/functions/radialGradient";
-import rgba from "assets/theme/functions/rgba";
 import palette from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-
-// Images
 import bgSignIn from "assets/images/signUpImage.png";
+import bgSignIn2 from "assets/images/backdrop2.jpg";
 
-function SignIn() {
+function SignUp() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
+  const [error, setError] = useState(null);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const handleSignUp = async () => {
+    try {
+      await doCreateUserWithEmailAndPassword(email, password);
+     
+      window.location.href = "/authentication/step-2";
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <CoverLayout
@@ -58,6 +73,12 @@ function SignIn() {
             backgroundColor: secondary.focus,
           })}
         >
+          
+          {error && (
+            <VuiTypography color="error" fontWeight="bold" textAlign="center">
+              {error}
+            </VuiTypography>
+          )}
           <VuiTypography
             color="white"
             fontWeight="bold"
@@ -207,6 +228,8 @@ function SignIn() {
               <VuiInput
                 type="email"
                 placeholder="Your email..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 sx={({ typography: { size } }) => ({
                   fontSize: size.sm,
                 })}
@@ -232,6 +255,8 @@ function SignIn() {
               <VuiInput
                 type="password"
                 placeholder="Your password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 sx={({ typography: { size } }) => ({
                   fontSize: size.sm,
                 })}
@@ -251,7 +276,7 @@ function SignIn() {
             </VuiTypography>
           </VuiBox>
           <VuiBox mt={4} mb={1}>
-            <VuiButton color="info" fullWidth>
+            <VuiButton color="info" fullWidth onClick={handleSignUp}>
               SIGN UP
             </VuiButton>
           </VuiBox>
@@ -260,7 +285,7 @@ function SignIn() {
               Already have an account?{" "}
               <VuiTypography
                 component={Link}
-                to="/authentication/sign-in"
+                to="/authentication/step-2"
                 variant="button"
                 color="white"
                 fontWeight="medium"
@@ -275,4 +300,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

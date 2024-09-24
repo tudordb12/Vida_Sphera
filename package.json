@@ -1,18 +1,4 @@
 {
-	"name": "vision-ui-dashboard-react",
-	"version": "3.0.0",
-	"private": true,
-	"author": "Creative Tim",
-	"license": "See license in https://www.creative-tim.com/license",
-	"description": "Material UI version of Vision UI Dashboard by Creative Tim",
-	"homepage": "https://demos.creative-tim.com/vision-ui-dashboard-react/#/dashboard",
-	"bugs": {
-		"url": "https://github.com/creativetimofficial/vision-ui-dashboard-react/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/creativetimofficial/vision-ui-dashboard-react.git"
-	},
 	"dependencies": {
 		"@emotion/cache": "11.4.0",
 		"@emotion/react": "^11.9.3",
@@ -47,6 +33,7 @@
 		"cross-env": "^7.0.3",
 		"eslint": "^7.11.0",
 		"react-scripts": "^5.0.1"
+		
 	},
 	"scripts": {
 		"start": "react-scripts start",

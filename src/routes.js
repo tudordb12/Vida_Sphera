@@ -31,6 +31,7 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Step2 from "layouts/authentication/step-2";
 
 
 // Vision UI Dashboard React icons
@@ -107,6 +108,15 @@ const routes = [
     route: "/authentication/sign-up",
     icon: <IoRocketSharp size="15px" color="inherit" />,
     component: SignUp,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "",  // Leave this empty
+    key: "step-2",
+    route: "/authentication/step-2",
+    icon: <span style={{ display: 'none' }}></span>, // Use a span with display none
+    component: Step2,
     noCollapse: true,
   },
 ];
