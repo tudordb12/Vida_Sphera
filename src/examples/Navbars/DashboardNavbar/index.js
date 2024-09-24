@@ -35,7 +35,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const location = useLocation(); // Get the current location
 
   useEffect(() => {
-    // Setting the navbar type
+    // Set the navbar type
     if (fixedNavbar) {
       setNavbarType("sticky");
     } else {
@@ -98,6 +98,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
     </Menu>
   );
 
+  // Check if the current route is the Step2 page
+  const isStep2Page = location.pathname === '/authentication/step-2';
+  console.log("Current Route: ", location.pathname); // For debugging purposes
+
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
@@ -106,28 +110,31 @@ function DashboardNavbar({ absolute, light, isMini }) {
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <VuiBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
-          <Breadcrumbs icon="home" title={location.pathname.split("/").pop()} route={location.pathname.split("/").slice(1)} light={light} />
+          <Breadcrumbs 
+            icon="home" 
+            title={isStep2Page ? "Step 2" : location.pathname.split("/").pop()} 
+            route={location.pathname.split("/").slice(1)} 
+            light={light} 
+          />
         </VuiBox>
-        {isMini ? null : (
+        {/* Conditional rendering for the navbar elements */}
+        {!isStep2Page && ( // Render navbar elements only if NOT on Step 2 page
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            {/* Only render this input if we are NOT on the Step2 page */}
-            {location.pathname !== '/authentication/step-2' && (
-              <VuiBox pr={1}>
-                <VuiInput
-                  placeholder="Type here..."
-                  icon={{ component: "search", direction: "left" }}
-                  sx={({ breakpoints }) => ({
-                    [breakpoints.down("sm")]: {
-                      maxWidth: "80px",
-                    },
-                    [breakpoints.only("sm")]: {
-                      maxWidth: "80px",
-                    },
-                    backgroundColor: "info.main !important",
-                  })}
-                />
-              </VuiBox>
-            )}
+            <VuiBox pr={1}>
+              <VuiInput
+                placeholder="Type here..."
+                icon={{ component: "search", direction: "left" }}
+                sx={({ breakpoints }) => ({
+                  [breakpoints.down("sm")]: {
+                    maxWidth: "80px",
+                  },
+                  [breakpoints.only("sm")]: {
+                    maxWidth: "80px",
+                  },
+                  backgroundColor: "info.main !important",
+                })}
+              />
+            </VuiBox>
             <VuiBox color={light ? "white" : "inherit"}>
               <Link to="/authentication/sign-in">
                 <IconButton sx={navbarIconButton} size="small">

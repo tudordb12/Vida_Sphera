@@ -56,9 +56,9 @@ function Step2() {
 
   return (
     <CoverLayout
-      title="Welcome!"
+      title="Welcome aboard!"
       color="white"
-      description="Use these awesome forms to login or create new account in your project for free."
+      description="Please enter your personal information so we can tailor your experience :)"
       image={bgSignIn2}
       premotto="PERSONAL HEALTH TO THE NEXT LEVEL"
       motto="VIDA SPHERA"
@@ -89,7 +89,7 @@ function Step2() {
               fontSize: size.lg,
             })}
           >
-            Register with
+           Your Details
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
             <GradientBorder borderRadius="xl">
@@ -227,9 +227,9 @@ function Step2() {
               )}
             >
               <VuiInput
-                type="age"
+                type="email"
                 placeholder="Your age..."
-                value={age}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 sx={({ typography: { size } }) => ({
                   fontSize: size.sm,
@@ -278,23 +278,10 @@ function Step2() {
           </VuiBox>
           <VuiBox mt={4} mb={1}>
             <VuiButton color="info" fullWidth onClick={handleSignUp}>
-              SIGN UP
+              NEXT
             </VuiButton>
           </VuiBox>
-          <VuiBox mt={3} textAlign="center">
-            <VuiTypography variant="button" color="text" fontWeight="regular">
-              Already have an account?{" "}
-              <VuiTypography
-                component={Link}
-                to="/authentication/sign-in"
-                variant="button"
-                color="white"
-                fontWeight="medium"
-              >
-                Sign in
-              </VuiTypography>
-            </VuiTypography>
-          </VuiBox>
+          
         </VuiBox>
       </GradientBorder>
     </CoverLayout>
