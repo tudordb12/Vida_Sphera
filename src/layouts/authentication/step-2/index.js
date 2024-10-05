@@ -296,7 +296,7 @@ function Step2() {
       color="white"
       description="Please enter your personal information so we can tailor your experience :)"
       image={bgSignIn2}
-      premotto="PERSONAL HEALTH TO THE NEXT LEVEL"
+      premotto="YOUR HEALTH LIKE AN ADMIN"
       motto="VIDA SPHERA"
       cardContent
     >

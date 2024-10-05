@@ -114,7 +114,7 @@ function HomeNavbar({ absolute, light, isMini }) {
                     fontWeight="medium"
                     color={light ? "white" : "dark"}
                   >
-                    Sign Out
+                    Sign In
                   </VuiTypography>
                 </IconButton>
               </Link>

@@ -42,11 +42,7 @@ function CoverLayout({
       )}
     >
       <DefaultNavbar
-        action={{
-          type: "external",
-          route: " ",
-          label: "PLACEHOLDER",
-        }}
+        
       />
       <VuiBox
         height="100%"

@@ -1,7 +1,7 @@
 
 
 /** 
-  All of the routes for the Vision UI Dashboard React are added here,
+
   You can add a new route, customize the routes and delete the routes here.
 
   Once you add a new route on this file it will be visible automatically on
@@ -22,7 +22,7 @@
   10. The `component` key is used to store the component of its route.
 */
 
-// Vision UI Dashboard React layouts
+
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
@@ -33,7 +33,7 @@ import SignUp from "layouts/authentication/sign-up";
 import Step2 from "layouts/authentication/step-2";
 
 
-// Vision UI Dashboard React icons
+
 import { IoRocketSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill, BsNewspaper } from "react-icons/bs";

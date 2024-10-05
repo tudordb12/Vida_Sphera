@@ -312,7 +312,7 @@ function SignUp() {
         >
           {/* Input field */}
           <VuiInput
-            type="tel" // Set input type to phone
+            type="name" // Set input type to phone
             placeholder="Phone Number" // Placeholder text
             value={phone} // Bind input to state
             onChange={handlePhoneChange} // Update state on change
@@ -355,7 +355,7 @@ function SignUp() {
         >
           {/* Input field */}
           <VuiInput
-            type="tel" // Set input type to number
+            type="name" // Set input type to number
             placeholder="Weight in kg" // Placeholder text
             value={weight} // Bind input to state
             onChange={handleWeightChange} // Update state on change
@@ -398,7 +398,7 @@ function SignUp() {
         >
           {/* Input field */}
           <VuiInput
-            type="tel" // Set input type to number
+            type="name" // Set input type to number
             placeholder="Height in cm" // Placeholder text
             value={height} // Bind input to state
             onChange={handleHeightChange} // Update state on change
@@ -424,7 +424,7 @@ function SignUp() {
         {/* Label for the input */}
         <VuiBox mb={1} ml={0.5}>
           <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-            Birthyear
+           
           </VuiTypography>
         </VuiBox>
 
@@ -441,7 +441,7 @@ function SignUp() {
         >
           {/* Input field */}
           <VuiInput
-            type="tel" // Set input type to number
+            type="name" // Set input type to number
             placeholder="Birth Year" // Placeholder text
             value={birthdate} // Use birthdate here
             onChange={handleBirthYearChange} // Update state on change
@@ -467,7 +467,7 @@ function SignUp() {
       color="white"
       description="Join us for personalized health tips, wellness resources, and more. Sign up now!"
       image={bgSignIn}
-      premotto="PERSONAL HEALTH TO THE NEXT LEVEL"
+      premotto="YOUR HEALTH LIKE AN ADMIN"
       motto="VIDA SPHERA"
       cardContent
     >
@@ -820,18 +820,7 @@ function SignUp() {
             </GradientBorder>
           </VuiBox>
           
-         <VuiBox display="flex" alignItems="center">
-            <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
-            <VuiTypography
-              variant="caption"
-              color="white"
-              fontWeight="medium"
-              onClick={handleSetRememberMe}
-              sx={{ cursor: "pointer", userSelect: "none" }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;Remember me
-            </VuiTypography>
-          </VuiBox>
+         
           <VuiBox mt={4} mb={1}>
             <VuiButton color="info" fullWidth onClick={handleSignUp}>
               SIGN UP

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // Firebase Firestore and Auth imports
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Firestore imports
+import { getFirestore, doc, getDoc, query, collection, where, getDocs } from "firebase/firestore"; // Firestore imports
 // Firebase configuration
 
 // MUI Material components
@@ -16,6 +16,7 @@ import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Header from "layouts/profile/components/Header";
 import Footer from "examples/Footer";
+import Icon from "@mui/material/Icon";
 // Images
 import team1 from "assets/images/avatar1.png";
 import team2 from "assets/images/avatar2.png";
@@ -26,19 +27,38 @@ import profile2 from "assets/images/profile-2.png";
 import profile3 from "assets/images/profile-3.png";
 
 import Welcome from "../profile/components/Welcome/index";
-import CarInformations from "./components/CarInformations";
+import MainProfile from "./components/MainProfile";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
+import axios from 'axios';
 
 function Overview() {
   const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [doctors, setDoctors] = useState([]);
+  const [geoInfo, setGeoInfo] = useState({});
+
+  useEffect(() => {
+    const getVisitorIPAndFetchInfo = async () => {
+      try {
+        // First, get the visitor's IP address
+        const response = await fetch('https://api.ipify.org');
+        const ip = await response.text();
+        // Now use that IP to fetch location info
+        const locationResponse = await axios.get(`http://ip-api.com/json/${ip}`);
+        setGeoInfo(locationResponse.data);  // Update state with geo info
+      } catch (error) {
+        console.error('Failed to fetch IP or location info', error);
+      }
+    };
+  
+    getVisitorIPAndFetchInfo();  // Call the combined function
+  }, []);
 
   // Fetch user data from Firestore when authenticated
   useEffect(() => {
     const auth = getAuth(); // Initialize Firebase Auth
     const db = getFirestore(); // Initialize Firestore
 
-   
     const fetchUserData = async (userEmail) => {
       const userDocRef = doc(db, "users", userEmail);
       const userDoc = await getDoc(userDocRef);
@@ -52,16 +72,28 @@ function Overview() {
       setLoading(false);
     };
 
+    const fetchDoctors = async (city) => {
+      const db = getFirestore();
+      const doctorsQuery = query(collection(db, "doctors"), where("City", "==", city));
+      const querySnapshot = await getDocs(doctorsQuery);
+      const doctorsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setDoctors(doctorsList);
+    };
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         fetchUserData(user.email); // Fetch Firestore document using user's email as document ID
+        // Fetch doctors if geoInfo.city is available
+        if (geoInfo.city) {
+          fetchDoctors(geoInfo.city); // Fetch doctors based on user's city
+        }
       } else {
         setLoading(false);
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [geoInfo.city]); // Add geoInfo.city as a dependency to re-fetch when it changes
 
   if (loading) {
     return <div>Loading...</div>; // Show loading while fetching data
@@ -70,6 +102,7 @@ function Overview() {
   if (!userInfo) {
     return <div>No user information available</div>; // Handle case where no user data is found
   }
+  
 
   return (
     <DashboardLayout>
@@ -109,7 +142,7 @@ function Overview() {
               },
             })}
           >
-            <CarInformations />
+            <MainProfile />
           </Grid>
           <Grid
             item
@@ -122,16 +155,18 @@ function Overview() {
               },
             })}
           >
+           
             <ProfileInfoCard
               title="Profile Information"
               description={`Hi, ${userInfo.name}. Here you can find all of your stored health and personal related data. `}
+              
               info={{
                 fullName: userInfo.name,
                 mobile: userInfo.phone,
                 email: userInfo.email,
                 birthyear: userInfo.birthdate,
-                country: "Romania",
-                city: "Timișoara", // You can replace this with user location if available
+                country: geoInfo.country || 'Loading...', // Using geoInfo for country
+                city: geoInfo.city || 'Loading...', // You can replace this with user location if available
                 height: `${userInfo.height} cm`,
                 weight: `${userInfo.weight} kg`,
                 allergies: userInfo.allergies,
@@ -145,81 +180,43 @@ function Overview() {
         </Grid>
       </VuiBox>
       <Grid container spacing={3} mb="30px">
-        <Grid item xs={12} xl={3} height="100%">
-          <PlatformSettings />
-        </Grid>
+        
         <Grid item xs={12} xl={9}>
           <Card>
             <VuiBox display="flex" flexDirection="column" height="100%">
               <VuiBox display="flex" flexDirection="column" mb="24px">
                 <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-                  Projects
+                  Available VIDA SPHERA registered Professionals in your area
                 </VuiTypography>
                 <VuiTypography color="text" variant="button" fontWeight="regular">
-                  Architects design houses
+                  Doctor Recommandations
                 </VuiTypography>
               </VuiBox>
               <Grid container spacing={3}>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile1}
-                    label="project #2"
-                    title="modern"
-                    description="As Uber works through a huge amount of internal management turmoil."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team1, name: "Elena Morison" },
-                      { image: team2, name: "Ryan Milly" },
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team4, name: "Peterson" },
-                    ]}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile2}
-                    label="project #1"
-                    title="scandinavian"
-                    description="Music is something that every person has his or her own specific opinion about."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team4, name: "Peterson" },
-                      { image: team1, name: "Elena Morison" },
-                      { image: team2, name: "Ryan Milly" },
-                    ]}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}>
-                  <DefaultProjectCard
-                    image={profile3}
-                    label="project #3"
-                    title="minimalist"
-                    description="Different people have different taste, and various types of music."
-                    action={{
-                      type: "internal",
-                      route: "/pages/profile/profile-overview",
-                      color: "white",
-                      label: "VIEW ALL",
-                    }}
-                    authors={[
-                      { image: team4, name: "Peterson" },
-                      { image: team3, name: "Nick Daniel" },
-                      { image: team2, name: "Ryan Milly" },
-                      { image: team1, name: "Elena Morison" },
-                    ]}
-                  />
-                </Grid>
+                {doctors.length > 0 ? (
+                  doctors.map((doctor) => (
+                    <Grid item xs={12} md={6} xl={4} key={doctor.id}>
+                      <DefaultProjectCard
+                        image={doctor.Image} // Use the image URL from the doctor document
+                        label=""
+                        title={doctor.Name} // Display doctor's name
+                        description={doctor.Field} // Display doctor's field
+                        action={{
+                          type: "internal",
+                          route: "",
+                          color: "white",
+                          label: doctor.Number, // Display phone number
+                        }}
+                      />
+                    </Grid>
+                  ))
+                ) : (
+                  <Grid item xs={12}>
+                    <VuiTypography color="text" variant="button" fontWeight="regular">
+                      No doctors available in your area.
+                    </VuiTypography>
+                  </Grid>
+                )}
               </Grid>
             </VuiBox>
           </Card>

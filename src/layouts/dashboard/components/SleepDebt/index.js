@@ -7,7 +7,7 @@ import { FaEllipsisH } from 'react-icons/fa';
 import linearGradient from 'assets/theme/functions/linearGradient';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function ReferralTracking() {
+function SleepDebt() {
 	const { info, gradients } = colors;
 	const { cardContent } = gradients;
 
@@ -25,7 +25,7 @@ function ReferralTracking() {
 					sx={{ width: '100%' }}
 					mb='40px'>
 					<VuiTypography variant='lg' color='white' mr='auto' fontWeight='bold'>
-						Sleep Tracking
+						Your Sleep Debt
 					</VuiTypography>
 					<VuiBox
 						display='flex'
@@ -159,4 +159,4 @@ function ReferralTracking() {
 	);
 }
 
-export default ReferralTracking;
+export default SleepDebt;

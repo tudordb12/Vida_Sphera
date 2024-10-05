@@ -72,7 +72,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         <VuiBox mb={1}>
           {action.type === "internal" ? (
             <VuiTypography
-              component={Link}
+              component={''}
               to={action.route}
               variant="h5"
               color="white"
@@ -82,8 +82,8 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
             </VuiTypography>
           ) : (
             <VuiTypography
-              component="a"
-              href={action.route}
+              component=""
+              href={''}
               target="_blank"
               rel="noreferrer"
               color="white"
@@ -102,7 +102,7 @@ function DefaultProjectCard({ image, label, title, description, action, authors 
         <VuiBox display="flex" justifyContent="space-between" alignItems="center">
           {action.type === "internal" ? (
             <VuiButton
-              component={Link}
+              component={''}
               to={action.route}
               variant="outlined"
               size="small"

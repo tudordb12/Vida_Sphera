@@ -52,7 +52,7 @@ function SignIn() {
       title="Nice to see you!"
       color="white"
       description="Enter your email and password to sign in"
-      premotto="PERSONAL HEALTH TO THE NEXT LEVEL"
+      premotto="YOUR HEALTH LIKE AN ADMIN"
       motto="VIDA SPHERA"
       image={bgSignIn2}
     >
@@ -113,19 +113,8 @@ function SignIn() {
           </GradientBorder>
         </VuiBox>
 
-        {/* Remember Me Switch */}
-        <VuiBox display="flex" alignItems="center">
-          <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;Remember me
-          </VuiTypography>
-        </VuiBox>
+
+        
 
        
         {error && (

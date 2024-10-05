@@ -1,12 +1,10 @@
-
-
 export const lineChartDataDashboard = [
   {
-    name: "Mobile apps",
-    data: [500, 250, 300, 220, 500, 250, 300, 230, 300, 350, 250, 400],
+    name: "Unhealthy Sleep Schedule Hours",
+    data: [4, 5, 3, 2, 10, 5, 9, 4, 3, 4, 7, 3],  // Hours slept (average per night)
   },
   {
-    name: "Websites",
-    data: [200, 230, 300, 350, 370, 420, 550, 350, 400, 500, 330, 550],
+    name: "Healthy Sleep Schedule Hours",
+    data: [7, 6, 8, 7, 6, 5, 8, 8, 7, 8, 6, 9],  // Hours slept (average per night)
   },
 ];

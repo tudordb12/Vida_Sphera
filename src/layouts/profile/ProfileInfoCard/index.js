@@ -70,6 +70,7 @@ function ProfileInfoCard({ title, description, info, social }) {
         height: "100%",
       }}
     >
+      
       <VuiBox display="flex" mb="14px" justifyContent="space-between" alignItems="center">
         <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
           {title}

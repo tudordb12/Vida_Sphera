@@ -24,7 +24,7 @@ import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import BMI from "layouts/dashboard/components/BMI";
-import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
+import SleepDebt from "layouts/dashboard/components/SleepDebt";
 
 // React icons
 import { IoIosRocket } from "react-icons/io";
@@ -95,7 +95,7 @@ function Assistant() {
               <BMI />
             </Grid>
             <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking/>
+              <SleepDebt/>
             </Grid>
           </Grid>
         </VuiBox>
