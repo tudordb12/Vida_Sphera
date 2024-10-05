@@ -1,58 +1,50 @@
-
-import { Card, Stack } from "@mui/material";
 // @mui material components
 import Grid from "@mui/material/Grid";
-import colors from "assets/theme/base/colors";
-
-// Vision UI Dashboard React base styles
-import linearGradient from "assets/theme/functions/linearGradient";
+import Icon from "@mui/material/Icon";
+import { Card, LinearProgress, Stack } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
-import VuiProgress from "components/VuiProgress";
 import VuiTypography from "components/VuiTypography";
-
-// Vision UI Dashboard React contexts
-import { setDirection, useVisionUIController } from "context";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import BarChart from "examples/Charts/BarCharts/BarChart";
-
-// Data
-import LineChart from "examples/Charts/LineCharts/LineChart";
-import Footer from "examples/Footer";
+import VuiProgress from "components/VuiProgress";
 
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import OrderOverview from "layouts/rtl/components/OrderOverview";
-import Projects from "layouts/rtl/components/Projects";
-import ReferralTracking from "layouts/rtl/components/ReferralTracking";
-import SatisfactionRate from "layouts/rtl/components/SatisfactionRate";
+import Footer from "examples/Footer";
+import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
+import linearGradient from "assets/theme/functions/linearGradient";
+
+// Vision UI Dashboard React base styles
+import typography from "assets/theme/base/typography";
+import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
-import WelcomeMark from "layouts/rtl/components/WelcomeMark";
-import { barChartDataDashboard } from "layouts/rtl/data/barChartData";
-import { barChartOptionsDashboard } from "layouts/rtl/data/barChartOptions";
-import { lineChartDataDashboard } from "layouts/rtl/data/lineChartData";
-import { lineChartOptionsDashboard } from "layouts/rtl/data/lineChartOptions";
-import { useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
+import Projects from "layouts/dashboard/components/Projects";
+import OrderOverview from "layouts/dashboard/components/OrderOverview";
+import BMI from "layouts/dashboard/components/BMI";
+import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
 // React icons
 import { IoIosRocket } from "react-icons/io";
-import { IoBuild, IoDocumentText, IoGlobe, IoWallet } from "react-icons/io5";
+import { IoGlobe } from "react-icons/io5";
+import { IoBuild } from "react-icons/io5";
+import { IoWallet } from "react-icons/io5";
+import { IoDocumentText } from "react-icons/io5";
+import { FaShoppingCart } from "react-icons/fa";
 
-function RTL() {
+// Data
+import LineChart from "examples/Charts/LineCharts/LineChart";
+import BarChart from "examples/Charts/BarCharts/BarChart";
+import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
+import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
+import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
+import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+
+function Assistant() {
   const { gradients } = colors;
   const { cardContent } = gradients;
-  const [, dispatch] = useVisionUIController();
-
-  // Changing the direction to rtl
-  useEffect(() => {
-    setDirection(dispatch, "rtl");
-
-    return () => setDirection(dispatch, "ltr");
-  }, []);
 
   return (
     <DashboardLayout>
@@ -60,33 +52,33 @@ function RTL() {
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "أموال اليوم", fontWeight: "regular" }}
+                title={{ text: "today's money", fontWeight: "regular" }}
                 count="$53,000"
                 percentage={{ color: "success", text: "+55%" }}
                 icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "مستخدمي اليوم" }}
+                title={{ text: "today's users" }}
                 count="2,300"
                 percentage={{ color: "success", text: "+3%" }}
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "عملاء جدد" }}
+                title={{ text: "new clients" }}
                 count="+3,462"
                 percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: <IoDocumentText size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "إجمالي المبيعات" }}
+                title={{ text: "total sales" }}
                 count="$103,430"
                 percentage={{ color: "success", text: "+5%" }}
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
@@ -96,30 +88,30 @@ function RTL() {
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing="18px">
-            <Grid item xs={12} xl={5}>
+            <Grid item xs={12} lg={12} xl={5}>
               <WelcomeMark />
             </Grid>
             <Grid item xs={12} lg={6} xl={3}>
-              <SatisfactionRate />
+              <BMI />
             </Grid>
             <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking />
+              <ReferralTracking/>
             </Grid>
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={7}>
+            <Grid item xs={12} lg={6} xl={7}>
               <Card>
                 <VuiBox sx={{ height: "100%" }}>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    نظرة عامة على المبيعات
+                    Sleep Debt Plan
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
-                      + 5٪ أكثر
+                      +5% improved{" "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
-                        في عام 2021
+                        
                       </VuiTypography>
                     </VuiTypography>
                   </VuiBox>
@@ -132,7 +124,7 @@ function RTL() {
                 </VuiBox>
               </Card>
             </Grid>
-            <Grid item xs={12} lg={5}>
+            <Grid item xs={12} lg={6} xl={5}>
               <Card>
                 <VuiBox>
                   <VuiBox
@@ -153,13 +145,13 @@ function RTL() {
                     />
                   </VuiBox>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    المستخدمين النشطين
+                    Active Users
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
-                      (+23)
+                      (+23){" "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
-                        من الأسبوع الماضي
+                        than last week
                       </VuiTypography>
                     </VuiTypography>
                   </VuiBox>
@@ -180,7 +172,7 @@ function RTL() {
                           <IoWallet color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          المستخدمون
+                          Users
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
@@ -204,7 +196,7 @@ function RTL() {
                           <IoIosRocket color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          نقرات
+                          Clicks
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
@@ -228,7 +220,7 @@ function RTL() {
                           <FaShoppingCart color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          مبيعات
+                          Sales
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
@@ -252,7 +244,7 @@ function RTL() {
                           <IoBuild color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          العناصر
+                          Items
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
@@ -266,18 +258,11 @@ function RTL() {
             </Grid>
           </Grid>
         </VuiBox>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
-          </Grid>
-        </Grid>
+       
       </VuiBox>
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default RTL;
+export default Assistant;

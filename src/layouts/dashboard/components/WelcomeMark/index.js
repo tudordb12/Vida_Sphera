@@ -2,24 +2,37 @@ import React, { useEffect, useState } from "react";
 import { Card, Icon } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import the correct Firebase Auth method
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore"; // Firestore imports
 import gif from "assets/images/cardimgfree.png";
 
 const WelcomeMark = () => {
   const [userName, setUserName] = useState(null);
 
-  // Fetch the current signed-in user
   useEffect(() => {
     const auth = getAuth(); // Initialize Firebase Auth
+    const db = getFirestore(); // Initialize Firestore
 
-    // Add listener for auth state changes
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // If the user is signed in, set the display name or email
-        setUserName(user.displayName || user.email); // Use the display name if available, else use the email
+        const docRef = doc(db, "users", user.email); // Firestore document reference
+        try {
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            // Document found
+            const userData = docSnap.data();
+            console.log("User data:", userData); // Log user data to check if it's fetched correctly
+            setUserName(userData.name); // Adjust the field name if necessary
+          } else {
+            console.error("No such document!"); // Document does not exist
+            setUserName(user.displayName || user.email); // Fallback to displayName or email
+          }
+        } catch (error) {
+          console.error("Error fetching document:", error); // Log any errors
+          setUserName(user.displayName || user.email); // Fallback
+        }
       } else {
-        // No user is signed in, set a fallback name
-        setUserName(null);
+        setUserName("Guest"); // Change fallback to "Guest" for better UX
       }
     });
 
@@ -67,35 +80,10 @@ const WelcomeMark = () => {
             mb="auto"
           >
             Glad to see you again!
-            <br /> Ask me anything.
+            <br /> 
           </VuiTypography>
         </VuiBox>
-        <VuiTypography
-          component="a"
-          href="#"
-          variant="button"
-          color="white"
-          fontWeight="regular"
-          sx={{
-            mr: "5px",
-            display: "inline-flex",
-            alignItems: "center",
-            cursor: "pointer",
-
-            "& .material-icons-round": {
-              fontSize: "1.125rem",
-              transform: `translate(2px, -0.5px)`,
-              transition: "transform 0.2s cubic-bezier(0.34,1.61,0.7,1.3)",
-            },
-
-            "&:hover .material-icons-round, &:focus  .material-icons-round": {
-              transform: `translate(6px, -0.5px)`,
-            },
-          }}
-        >
-          Tap to record
-          <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
-        </VuiTypography>
+        
       </VuiBox>
     </Card>
   );

@@ -1,30 +1,31 @@
-
-
 import AppBar from "@mui/material/AppBar";
-// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+
 // Images
-import burceMars from "assets/images/avatar-simmmple.png";
+import burceMars from "assets/images/avatar-simmmple.png";  // Default image (optional)
+import female from "assets/images/female.avif";
+import male from "assets/images/male.avif";
+
 // Vision UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import VuiAvatar from "components/VuiAvatar";
+
 // Vision UI Dashboard React components
+import VuiAvatar from "components/VuiAvatar";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-// Vision UI Dashboard React icons
-import { IoCube } from "react-icons/io5";
-import { IoDocument } from "react-icons/io5";
-import { IoBuild } from "react-icons/io5";
+
 // Vision UI Dashboard React example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import { useEffect, useState } from "react";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
+  const [userData, setUserData] = useState(null); // State to store user data
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -34,9 +35,7 @@ function Header() {
         : setTabsOrientation("horizontal");
     }
 
-    /** 
-     The event listener that's calling the handleTabsOrientation function when resizing the window.
-    */
+    // The event listener that's calling the handleTabsOrientation function when resizing the window.
     window.addEventListener("resize", handleTabsOrientation);
 
     // Call the handleTabsOrientation function to set the state with the initial value.
@@ -46,7 +45,45 @@ function Header() {
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
 
+  useEffect(() => {
+    const auth = getAuth(); // Initialize Firebase Auth
+    const db = getFirestore(); // Initialize Firestore
+
+    const fetchUserData = async (email) => {
+      try {
+        const userDoc = doc(db, "users", email);
+        const docSnap = await getDoc(userDoc);
+        if (docSnap.exists()) {
+          setUserData(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    // Listen to authentication state and fetch user data
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserData(user.email);
+      } else {
+        console.log("No user signed in");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+
+  // Show loading state until userData is fetched
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
+  // Choose avatar image based on user's gender
+  const profileImage = userData.gender === "female" ? female : male;
 
   return (
     <VuiBox position="relative">
@@ -89,13 +126,14 @@ function Header() {
             })}
           >
             <VuiAvatar
-              src={burceMars}
+              src={profileImage}  // Conditionally rendered profile image
               alt="profile-image"
               variant="rounded"
               size="xl"
               shadow="sm"
             />
           </Grid>
+
           <Grid item xs={12} md={4.3} lg={4} xl={3.8} xxl={7}>
             <VuiBox
               height="100%"
@@ -110,14 +148,16 @@ function Header() {
                 },
               })}
             >
-              <VuiTypography variant="lg" color="white" fontWeight="bold">
-                Mark Johnson
+              {/* Replace with dynamic user data */}
+              <VuiTypography variant="h1" color="white" fontWeight="bold">
+                {userData.name}
               </VuiTypography>
               <VuiTypography variant="button" color="text" fontWeight="regular">
-                mark@simmmple.com
+                {userData.email}
               </VuiTypography>
             </VuiBox>
           </Grid>
+
           <Grid item xs={12} md={6} lg={6.5} xl={6} xxl={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs
@@ -126,9 +166,7 @@ function Header() {
                 onChange={handleSetTabValue}
                 sx={{ background: "transparent", display: "flex", justifyContent: "flex-end" }}
               >
-                <Tab label="OVERVIEW" icon={<IoCube color="white" size="16px" />} />
-                <Tab label="TEAMS" icon={<IoDocument color="white" size="16px" />} />
-                <Tab label="PROJECTS" icon={<IoBuild color="white" size="16px" />} />
+                {/* Tabs content can be added here */}
               </Tabs>
             </AppBar>
           </Grid>

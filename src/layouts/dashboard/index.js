@@ -23,7 +23,7 @@ import colors from "assets/theme/base/colors";
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
-import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
+import BMI from "layouts/dashboard/components/BMI";
 import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
 // React icons
@@ -92,10 +92,10 @@ function Dashboard() {
               <WelcomeMark />
             </Grid>
             <Grid item xs={12} lg={6} xl={3}>
-              <SatisfactionRate />
+              <BMI />
             </Grid>
             <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking />
+              <ReferralTracking/>
             </Grid>
           </Grid>
         </VuiBox>
@@ -105,13 +105,13 @@ function Dashboard() {
               <Card>
                 <VuiBox sx={{ height: "100%" }}>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Sales Overview
+                    Sleep Debt Plan
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
-                      +5% more{" "}
+                      +5% improved{" "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
+                        
                       </VuiTypography>
                     </VuiTypography>
                   </VuiBox>
@@ -258,14 +258,7 @@ function Dashboard() {
             </Grid>
           </Grid>
         </VuiBox>
-        <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
-          </Grid>
-        </Grid>
+       
       </VuiBox>
       <Footer />
     </DashboardLayout>

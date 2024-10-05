@@ -1,35 +1,76 @@
+// React imports
+import React, { useEffect, useState } from "react";
+// Firebase Firestore and Auth imports
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore"; // Firestore imports
+// Firebase configuration
 
-
-// @mui material components
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import Card from "@mui/material/Card";
+// MUI Material components
 import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+// Custom components (from your existing project)
+import VuiBox from "components/VuiBox";
+import VuiTypography from "components/VuiTypography";
+import ProfileInfoCard from "layouts/profile/ProfileInfoCard";
+import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import Header from "layouts/profile/components/Header";
+import Footer from "examples/Footer";
+// Images
 import team1 from "assets/images/avatar1.png";
 import team2 from "assets/images/avatar2.png";
 import team3 from "assets/images/avatar3.png";
 import team4 from "assets/images/avatar4.png";
-// Images
 import profile1 from "assets/images/profile-1.png";
 import profile2 from "assets/images/profile-2.png";
 import profile3 from "assets/images/profile-3.png";
-// Vision UI Dashboard React components
-import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-import Footer from "examples/Footer";
-// Vision UI Dashboard React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-// Overview page components
-import Header from "layouts/profile/components/Header";
-import PlatformSettings from "layouts/profile/components/PlatformSettings";
+
 import Welcome from "../profile/components/Welcome/index";
 import CarInformations from "./components/CarInformations";
+import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
 function Overview() {
+  const [userInfo, setUserInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch user data from Firestore when authenticated
+  useEffect(() => {
+    const auth = getAuth(); // Initialize Firebase Auth
+    const db = getFirestore(); // Initialize Firestore
+
+   
+    const fetchUserData = async (userEmail) => {
+      const userDocRef = doc(db, "users", userEmail);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        setUserInfo(userDoc.data());
+      } else {
+        console.error("No such user!");
+      }
+
+      setLoading(false);
+    };
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserData(user.email); // Fetch Firestore document using user's email as document ID
+      } else {
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading while fetching data
+  }
+
+  if (!userInfo) {
+    return <div>No user information available</div>; // Handle case where no user data is found
+  }
+
   return (
     <DashboardLayout>
       <Header />
@@ -82,32 +123,24 @@ function Overview() {
             })}
           >
             <ProfileInfoCard
-              title="profile information"
-              description="Hi, I’m Mark Johnson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
+              title="Profile Information"
+              description={`Hi, ${userInfo.name}. Here you can find all of your stored health and personal related data. `}
               info={{
-                fullName: "Mark Johnson",
-                mobile: "(44) 123 1234 123",
-                email: "mark@simmmple.com",
-                location: "United States",
+                fullName: userInfo.name,
+                mobile: userInfo.phone,
+                email: userInfo.email,
+                birthyear: userInfo.birthdate,
+                country: "Romania",
+                city: "Timișoara", // You can replace this with user location if available
+                height: `${userInfo.height} cm`,
+                weight: `${userInfo.weight} kg`,
+                allergies: userInfo.allergies,
+                medications: userInfo.medications,
+                dietaryPreferences: userInfo.dietary,
               }}
-              social={[
-                {
-                  link: "https://www.facebook.com/CreativeTim/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/creativetim",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/creativetimofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
+              social={[]}
             />
+
           </Grid>
         </Grid>
       </VuiBox>

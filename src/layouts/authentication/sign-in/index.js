@@ -21,7 +21,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import bgSignIn from "assets/images/signInImage.png";
-import bgSignIn2 from "assets/images/backdrop.avif"
+import bgSignIn2 from "assets/images/heartback.jpeg"
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -127,7 +127,7 @@ function SignIn() {
           </VuiTypography>
         </VuiBox>
 
-        {/* Error and Success Notifications */}
+       
         {error && (
           <VuiTypography color="error" fontWeight="bold" textAlign="center" mt={2}>
             {error}

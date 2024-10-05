@@ -12,6 +12,7 @@ import LineChart from 'examples/Charts/LineCharts/LineChart';
 import { lineChartDataProfile1, lineChartDataProfile2 } from 'variables/charts';
 import { lineChartOptionsProfile2, lineChartOptionsProfile1 } from 'variables/charts';
 import CircularProgress from '@mui/material/CircularProgress';
+import { FaMailchimp, FaMapMarked } from 'react-icons/fa';
 const CarInformations = () => {
 	const { gradients, info } = colors;
 	const { cardContent } = gradients;
@@ -24,10 +25,10 @@ const CarInformations = () => {
 			})}>
 			<VuiBox display='flex' flexDirection='column'>
 				<VuiTypography variant='lg' color='white' fontWeight='bold' mb='6px'>
-					Car Informations
+					Main Stuff
 				</VuiTypography>
 				<VuiTypography variant='button' color='text' fontWeight='regular' mb='30px'>
-					Hello, Linda! Your Car is ready.
+					
 				</VuiTypography>
 				<Stack
 					spacing='24px'
@@ -54,16 +55,51 @@ const CarInformations = () => {
 						})}
 						alignItems='center'>
 						<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
-							<CircularProgress variant='determinate' value={60} size={170} color='info' />
-							<VuiBox display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-								<VuiBox component='img' src={GreenLightning} />
-								<VuiTypography color='white' variant='h2' mt='6px' fontWeight='bold' mb='4px'>
-									68%
-								</VuiTypography>
-								<VuiTypography color='text' variant='caption'>
-									Current Load
-								</VuiTypography>
+						
+							<VuiBox
+								display='flex'
+								p='25px'
+								alignItems='center'
+								sx={{
+									background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
+									minHeight: '110px',
+									borderRadius: '20px'
+								}}>
+								<VuiBox display='flex' flexDirection='column' mr='auto'>
+									<VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
+										Your Location
+									</VuiTypography>
+									<VuiTypography
+										color='white'
+										variant='h4'
+										fontWeight='bold'
+										sx={({ breakpoints }) => ({
+											[breakpoints.only('xl')]: {
+												fontSize: '20px'
+											}
+										})}>
+										Location Name
+									</VuiTypography>
+								</VuiBox>
+								<VuiBox>
+									<VuiTypography> ‎ ‎ ‎ ‎ ‎ </VuiTypography>
+									
+								</VuiBox>
+								<VuiBox
+									display='flex'
+									justifyContent='center'
+									alignItems='center'
+									sx={{
+										background: info.main,
+										borderRadius: '12px',
+										width: '56px',
+										height: '56px'
+									}}>
+									<VuiBox component='icon' src={FaMapMarked} />
+								</VuiBox>
 							</VuiBox>
+						
+							
 						</VuiBox>
 						<VuiBox
 							display='flex'

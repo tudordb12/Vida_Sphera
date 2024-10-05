@@ -27,7 +27,6 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import Home from "layouts/home";
-import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
@@ -37,7 +36,7 @@ import Step2 from "layouts/authentication/step-2";
 // Vision UI Dashboard React icons
 import { IoRocketSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
-import { BsFillPersonFill } from "react-icons/bs";
+import { BsFillPersonFill, BsNewspaper } from "react-icons/bs";
 import { IoBuild } from "react-icons/io5";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
@@ -57,19 +56,10 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Tables",
-    key: "tables",
-    route: "/tables",
-    icon: <IoStatsChart size="15px" color="inherit" />,
-    component: Tables,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Billing",
+    name: "Your Feed",
     key: "billing",
     route: "/billing",
-    icon: <BsCreditCardFill size="15px" color="inherit" />,
+    icon: <BsNewspaper size="15px" color="inherit" />,
     component: Billing,
     noCollapse: true,
   },
@@ -110,15 +100,7 @@ const routes = [
     component: SignUp,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "",  // Leave this empty
-    key: "step-2",
-    route: "/authentication/step-2",
-    icon: <span style={{ display: 'none' }}></span>, // Use a span with display none
-    component: Step2,
-    noCollapse: true,
-  },
+ 
 ];
 
 export default routes;

@@ -209,19 +209,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
         })}
       >
         
-        <VuiBox mt={2}>
-          <VuiButton
-            component="a"
-            href=""
-            target="_blank"
-            rel="noreferrer"
-            variant="gradient"
-            color={color}
-            fullWidth
-          >
-            Enjoying Vida Sphera?
-          </VuiButton>
-        </VuiBox>
+       
       </VuiBox>
     </SidenavRoot>
   );

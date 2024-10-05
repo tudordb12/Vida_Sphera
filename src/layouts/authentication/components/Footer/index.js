@@ -58,25 +58,7 @@ function Footer() {
             
           </VuiTypography>
         </Grid>
-        <Grid item xs={10}>
-          <VuiBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
-            <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                Marketplace
-              </VuiTypography>
-            </VuiBox>
-            <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                Blog
-              </VuiTypography>
-            </VuiBox>
-            <VuiBox>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                License
-              </VuiTypography>
-            </VuiBox>
-          </VuiBox>
-        </Grid>
+       
       </Grid>
     </VuiBox>
   );
