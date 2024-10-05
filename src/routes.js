@@ -30,7 +30,8 @@ import Home from "layouts/home";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Step2 from "layouts/authentication/step-2";
+import Assistant from "layouts/assistant";
+
 
 
 
@@ -67,9 +68,9 @@ const routes = [
     type: "collapse",
     name: "Assistant",
     key: "assistant",
-    route: "/home",
+    route: "/assistant",
     icon: <MdAssistant size="15px" color="inherit" />,
-    component: Home,
+    component: Assistant,
     noCollapse: true,
   },
   { type: "title", title: "Account Pages", key: "account-pages" },
