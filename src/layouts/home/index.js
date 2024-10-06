@@ -31,10 +31,6 @@ import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
-import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
-import Projects from "layouts/dashboard/components/Projects";
-
-
 
 
 // React icons
@@ -87,13 +83,37 @@ function Home() {
           <Grid container spacing={3} justifyContent="center" alignItems="center">
             <Grid item xs={0} md={0} xl={0}>
               <VuiTypography variant="subtitle1" color="second">
-                YOUR HEALTH LIKE AN ADMIN.
+                Health made simple.
               </VuiTypography>
             </Grid>
           </Grid>
         </VuiBox>
 
-        
+        <VuiBox mb={3} sx={{ pl: 10, pr: 10, pt: 0, pb: 0 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={6} xl={7} sx={{ pl: 100, pr: 0, pt: 0, pb: 0 }}>
+              <GradientBorder
+                minWidth="100%"
+                padding="1px"
+                borderRadius={borders.borderRadius.lg}
+                backgroundImage={radialGradient(
+                  palette.gradients.borderLight.main,
+                  palette.gradients.borderLight.state,
+                  palette.gradients.borderLight.angle
+                )}
+              >
+                <VuiInput type="email" placeholder="Your email..." fontWeight="500" size="large"/>
+              </GradientBorder>
+            </Grid>
+            <Grid item xs={12} lg={6} xl={5}>
+              <VuiBox mt={0} mb={1}>
+                <VuiButton variant="gradient" color="info" size="large">
+                  Get Started
+                </VuiButton>
+              </VuiBox>
+            </Grid>
+          </Grid>
+        </VuiBox>
 
         <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={4}></Grid>

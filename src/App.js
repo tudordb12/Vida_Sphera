@@ -160,7 +160,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Switch>
         {getRoutes(routes)}
-        <Redirect from="*" to="/home" />
+        <Redirect from="*" to="/authentication/sign-in" />
       </Switch>
     </ThemeProvider>
   );

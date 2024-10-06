@@ -1,262 +1,253 @@
+// Assistant.js
+
 // @mui material components
-import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import { Card, LinearProgress, Stack } from "@mui/material";
+import { Card, Icon } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
-import VuiProgress from "components/VuiProgress";
-
-// Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import linearGradient from "assets/theme/functions/linearGradient";
+import Header from "./Header";
+// React and Axios for managing state and making API calls
+import React, { useState } from 'react';
+import axios from 'axios';
 
-// Vision UI Dashboard React base styles
-import typography from "assets/theme/base/typography";
-import colors from "assets/theme/base/colors";
+import { IoSend } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
+import { FcAssistant } from "react-icons/fc";
 
-// Dashboard layout components
-import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
-import BMI from "layouts/dashboard/components/BMI";
-import SleepDebt from "layouts/dashboard/components/SleepDebt";
+// Custom styles matching your dark theme
+const chatStyles = {
+  mainContainer: {
+    position: "relative",
+    height: "600px", // Fixed height
+    width: "100%", // Full width of the card
+    backgroundColor: "#131a28",
+    borderRadius: "15px",
+    padding: "10px",
+    boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+  },
+  messagesList: {
+    flex: 1,
+    overflowY: "auto",
+    marginBottom: "10px",
+    display: "flex",
+    flexDirection: "column", // Ensure messages stack vertically
+    alignItems: "flex-start", // Default alignment for messages
+  },
+  messageContainer: {
+    display: "flex",
+    alignItems: "center", // Align items in the center
+    maxWidth: "90%", // Increased flexibility on smaller screens
+    marginBottom: "10px",
+    borderRadius: "10px",
+    wordWrap: "break-word",
+  },
+  messageIncoming: {
+    backgroundColor: "#1e2a38",
+    color: "white",
+    alignSelf: "flex-start", // VIDA Assistant messages on the left
+    padding: "10px",
+  },
+  messageOutgoing: {
+    backgroundColor: "#2a3b4f",
+    color: "white",
+    alignSelf: "flex-end", // User messages on the right
+    padding: "10px",
+  },
+  message: {
+    borderRadius: "10px",
+    maxWidth: "100%", // Ensure it doesn't exceed the container
+  },
+  typingIndicator: {
+    fontStyle: "italic",
+    color: "#b0b9c3",
+  },
+  inputContainer: {
+    display: "flex",
+    marginTop: "10px",
+    alignItems: "center", // Center the input and button vertically
+  },
+  input: {
+    flex: 1,
+    padding: "10px",
+    border: "1px solid #394b61",
+    borderRadius: "10px",
+    outline: "none",
+    width: "100%", // Full width to occupy space in the container
+    fontSize: "14px",
+    backgroundColor: "#1e2a38",
+    color: "white",
+  },
+  iconContainer: {
+    bgColor: "#0075FF",
+    color: "white",
+    width: "2.5rem", // Smaller size for mobile
+    height: "2.5rem", // Smaller size for mobile
+    borderRadius: "lg",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    shadow: "md",
+    marginRight: "10px", // Space between icon and message text
+  },
+};
 
-// React icons
-import { IoIosRocket } from "react-icons/io";
-import { IoGlobe } from "react-icons/io5";
-import { IoBuild } from "react-icons/io5";
-import { IoWallet } from "react-icons/io5";
-import { IoDocumentText } from "react-icons/io5";
-import { FaShoppingCart } from "react-icons/fa";
-
-// Data
-import LineChart from "examples/Charts/LineCharts/LineChart";
-import BarChart from "examples/Charts/BarCharts/BarChart";
-import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
-import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
-import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
-import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
-
+// Function to handle Assistant component
 function Assistant() {
-  const { gradients } = colors;
-  const { cardContent } = gradients;
+  const [messages, setMessages] = useState([
+    { message: "Hello, I'm VIDA Assistant! Here to assist you with your health!", sender: "VIDA Assistant" },
+  ]);
+  const [inputValue, setInputValue] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+
+  const handleSend = async () => {
+    if (!inputValue) return; // Do not send empty messages
+
+    const userMessage = { message: inputValue, sender: "user" };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    setInputValue(""); // Clear the input field
+    setIsTyping(true); // Set typing state
+
+    // Fetch response from OpenAI API
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo', // Specify your desired model
+          messages: [{ role: 'user', content: inputValue }],
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`, // Use environment variable for API key
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const botMessage = {
+        message: response.data.choices[0].message.content,
+        sender: "VIDA Assistant",
+      };
+      
+      setMessages((prevMessages) => [...prevMessages, botMessage]); // Add VIDA Assistant's response
+    } catch (error) {
+      console.error("Error fetching from OpenAI API", error);
+      const errorMessage = {
+        message: "Sorry, something went wrong. Please try again.",
+        sender: "VIDA Assistant",
+      };
+      setMessages((prevMessages) => [...prevMessages, errorMessage]); // Handle error message
+    } finally {
+      setIsTyping(false); // Reset typing state
+    }
+  };
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <VuiBox py={3}>
         <VuiBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "today's money", fontWeight: "regular" }}
-                count="$53,000"
-                percentage={{ color: "success", text: "+55%" }}
-                icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "today's users" }}
-                count="2,300"
-                percentage={{ color: "success", text: "+3%" }}
-                icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "new clients" }}
-                count="+3,462"
-                percentage={{ color: "error", text: "-2%" }}
-                icon={{ color: "info", component: <IoDocumentText size="22px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "total sales" }}
-                count="$103,430"
-                percentage={{ color: "success", text: "+5%" }}
-                icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
-              />
-            </Grid>
-          </Grid>
-        </VuiBox>
-        <VuiBox mb={3}>
-          <Grid container spacing="18px">
-            <Grid item xs={12} lg={12} xl={5}>
-              <WelcomeMark />
-            </Grid>
-            <Grid item xs={12} lg={6} xl={3}>
-              <BMI />
-            </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
-              <SleepDebt/>
-            </Grid>
-          </Grid>
-        </VuiBox>
-        <VuiBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={7}>
-              <Card>
-                <VuiBox sx={{ height: "100%" }}>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Sleep Debt Plan
-                  </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      +5% improved{" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
-                  <VuiBox sx={{ height: "310px" }}>
-                    <LineChart
-                      lineChartData={lineChartDataDashboard}
-                      lineChartOptions={lineChartOptionsDashboard}
-                    />
-                  </VuiBox>
-                </VuiBox>
-              </Card>
-            </Grid>
-            <Grid item xs={12} lg={6} xl={5}>
-              <Card>
-                <VuiBox>
-                  <VuiBox
-                    mb="24px"
-                    height="220px"
-                    sx={{
-                      background: linearGradient(
-                        cardContent.main,
-                        cardContent.state,
-                        cardContent.deg
-                      ),
-                      borderRadius: "20px",
+          {/* Card containing VIDA Assistant */}
+          <Header></Header>
+          <Card>
+            <div style={chatStyles.mainContainer}>
+              <div style={chatStyles.messagesList}>
+                {messages.map((msg, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      ...chatStyles.messageContainer,
+                      ...(msg.sender === "VIDA Assistant"
+                        ? chatStyles.messageIncoming
+                        : chatStyles.messageOutgoing),
                     }}
                   >
-                    <BarChart
-                      barChartData={barChartDataDashboard}
-                      barChartOptions={barChartOptionsDashboard}
-                    />
-                  </VuiBox>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Active Users
-                  </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      (+23){" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        than last week
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
-                  <Grid container spacing="50px">
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
+                    {/* Display VIDA Assistant's icon */}
+                    {msg.sender === "VIDA Assistant" && (
+                      <VuiBox
+                        bgColor={chatStyles.iconContainer.bgColor}
+                        color={chatStyles.iconContainer.color}
+                        width={chatStyles.iconContainer.width}
+                        height={chatStyles.iconContainer.height}
+                        borderRadius={chatStyles.iconContainer.borderRadius}
+                        display={chatStyles.iconContainer.display}
+                        justifyContent={chatStyles.iconContainer.justifyContent}
+                        alignItems={chatStyles.iconContainer.alignItems}
+                        boxShadow={chatStyles.iconContainer.shadow} // Use boxShadow for shadow
+                        marginRight={chatStyles.iconContainer.marginRight}
                       >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoWallet color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Users
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        32,984
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
+                        <Icon fontSize="small" color="inherit">
+                          <FcAssistant size="20px" color="white" />
+                        </Icon>
+                      </VuiBox>
+                    )}
+                    {/* Display User's icon before the user message */}
+                    {msg.sender === "user" && (
+                      <VuiBox
+                        bgColor={chatStyles.iconContainer.bgColor}
+                        color={chatStyles.iconContainer.color}
+                        width={chatStyles.iconContainer.width}
+                        height={chatStyles.iconContainer.height}
+                        borderRadius={chatStyles.iconContainer.borderRadius}
+                        display={chatStyles.iconContainer.display}
+                        justifyContent={chatStyles.iconContainer.justifyContent}
+                        alignItems={chatStyles.iconContainer.alignItems}
+                        boxShadow={chatStyles.iconContainer.shadow} // Use boxShadow for shadow
+                        marginRight={chatStyles.iconContainer.marginRight}
                       >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoIosRocket color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clicks
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,42M
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <FaShoppingCart color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Sales
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,400$
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoBuild color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Items
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        320
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                  </Grid>
+                        <Icon fontSize="small" color="inherit">
+                          <FaUser size="20px" color="white" />
+                        </Icon>
+                      </VuiBox>
+                    )}
+                    {/* Message content */}
+                    <div style={{
+                      ...chatStyles.message,
+                      ...(msg.sender === "VIDA Assistant"
+                        ? chatStyles.messageIncoming
+                        : chatStyles.messageOutgoing),
+                    }}>
+                      <strong>{msg.sender}: </strong>
+                      <span>{msg.message}</span>
+                    </div>
+                  </div>
+                ))}
+                {isTyping && <div style={chatStyles.typingIndicator}>VIDA Assistant is typing...</div>}
+              </div>
+              <div style={chatStyles.inputContainer}>
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Type a message..."
+                  style={chatStyles.input}
+                />
+                <VuiBox
+                  onClick={handleSend}
+                  bgColor="#0075FF"
+                  color="white"
+                  width="3rem" // Adjusted for mobile
+                  height="3rem" // Adjusted for mobile
+                  marginLeft="10px"
+                  borderRadius="lg"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  shadow="md"
+                >
+                  <Icon fontSize="small" color="inherit">
+                    <IoSend size="20px" color="white" />
+                  </Icon>
                 </VuiBox>
-              </Card>
-            </Grid>
-          </Grid>
+              </div>
+            </div>
+          </Card>
         </VuiBox>
-       
       </VuiBox>
       <Footer />
     </DashboardLayout>
