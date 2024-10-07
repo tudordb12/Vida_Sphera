@@ -24,13 +24,13 @@ import HomeNavbar from "examples/Navbars/HomeNavbar";
 import Footer from "examples/Footer";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import linearGradient from "assets/theme/functions/linearGradient";
-import bgAdmin from "assets/images/body-background.png";
+import bgAdmin from "assets/images/homepage.jpg";
 import homepage from "assets/images/homepage.jpg";
 //   base styles
 import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 
-// Dashboard layout components
+import { useLocation, Link } from "react-router-dom";
 
 
 // React icons
@@ -49,10 +49,17 @@ import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptio
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
 
+import homeimage from "assets/images/Home.png";
+
+
 
 function Home() {
   const { gradients } = colors;
   const { cardContent } = gradients;
+  const handleGetStartedClick = () => {
+    // Navigate to the "Get Started" page, or any other functionality you need
+    navigate('/authentication/sign-up'); // Redirect to the Get Started page
+  };
 
   return (
     <HomeLayout>
@@ -87,10 +94,10 @@ function Home() {
           <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" mt={5}>
             <Grid item xs={12} md={8} lg={6}>
               {/* Image Card Placeholder */}
-              <Card sx={{ p: 3, backgroundColor: cardContent }}>
+              <Card sx={{ p: 3, backgroundColor: "transparent" }}>
                 <VuiBox
                   component="img"
-                  src="https://via.placeholder.com/1000x300" // Replace with the actual image or URL if available
+                  src={homeimage}// Replace with the actual image or URL if available
                   alt="Image Placeholder"
                   width="100%"
                   borderRadius={borders.borderRadius.md}
@@ -98,11 +105,13 @@ function Home() {
               </Card>
             </Grid>
 
-            <Grid item xs={12} md={8} lg={6} mt={3}>
+            <Grid item xs={15} md={8} lg={10} mt={3}>
               {/* Get Started Button */}
-              <VuiButton variant="gradient" color="info" size="large" fullWidth>
+              <Link to="/authentication/sign-up"> 
+              <VuiButton variant="contained" color="black" size="large" fullWidth  >
                 Get Started
               </VuiButton>
+              </Link>
             </Grid>
           </Grid>
         </VuiBox>
