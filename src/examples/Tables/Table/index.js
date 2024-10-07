@@ -14,12 +14,12 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import VuiAvatar from "components/VuiAvatar";
 import VuiTypography from "components/VuiTypography";
 
-// Vision UI Dashboard React base styles
+//   base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 import borders from "assets/theme/base/borders";

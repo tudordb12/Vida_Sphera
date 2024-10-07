@@ -11,7 +11,7 @@ import VuiAvatar from "components/VuiAvatar";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Vision UI Dashboard React example components
+//   example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function Header() {

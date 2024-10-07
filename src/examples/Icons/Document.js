@@ -3,7 +3,7 @@
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
-// Vision UI Dashboard React base styles
+//   base styles
 import colors from "assets/theme/base/colors";
 function Document({ color, size }) {
   return (

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { doSignInWithEmailAndPassword } from "../../../firebase/auth";  // Import Firebase sign-in method
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiInput from "components/VuiInput";

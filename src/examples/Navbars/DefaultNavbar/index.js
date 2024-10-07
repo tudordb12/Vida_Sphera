@@ -11,16 +11,16 @@ import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
 
-// Vision UI Dashboard React example components
+//   example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
-// Vision UI Dashboard React base styles
+//   base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import colors from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";

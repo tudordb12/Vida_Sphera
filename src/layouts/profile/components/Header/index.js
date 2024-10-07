@@ -11,15 +11,15 @@ import burceMars from "assets/images/avatar-simmmple.png";  // Default image (op
 import female from "assets/images/female.avif";
 import male from "assets/images/male.avif";
 
-// Vision UI Dashboard React base styles
+//   base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
-// Vision UI Dashboard React components
+//   components
 import VuiAvatar from "components/VuiAvatar";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Vision UI Dashboard React example components
+//   example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function Header() {

@@ -1,6 +1,6 @@
 
 
-// Vision UI Dashboard React components
+//   components
 import VuiButton from "components/VuiButton";
 import VuiBox from "components/VuiBox";
 

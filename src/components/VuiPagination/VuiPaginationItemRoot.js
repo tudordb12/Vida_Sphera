@@ -3,7 +3,7 @@
 // @mui material components
 import { styled } from "@mui/material/styles";
 
-// Vision UI Dashboard React components
+//   components
 import VuiButton from "components/VuiButton";
 
 export default styled(VuiButton)(({ theme, ownerState }) => {

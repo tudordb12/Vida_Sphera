@@ -5,19 +5,19 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 import { Card, LinearProgress, Stack } from "@mui/material";
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiProgress from "components/VuiProgress";
 
-// Vision UI Dashboard React example components
+//   example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import linearGradient from "assets/theme/functions/linearGradient";
 
-// Vision UI Dashboard React base styles
+//   base styles
 import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 

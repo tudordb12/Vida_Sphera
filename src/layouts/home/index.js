@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 import { Card, LinearProgress, Stack } from "@mui/material";
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiProgress from "components/VuiProgress";
@@ -18,7 +18,7 @@ import palette from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
 import welcome from "assets/images/welcome-profile.png";
 import gif from "assets/images/cardimgfree.png";
-// Vision UI Dashboard React example components
+//   example components
 import HomeLayout from "examples/LayoutContainers/HomeLayout";
 import HomeNavbar from "examples/Navbars/HomeNavbar";
 import Footer from "examples/Footer";
@@ -26,7 +26,7 @@ import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCar
 import linearGradient from "assets/theme/functions/linearGradient";
 import bgAdmin from "assets/images/body-background.png";
 import homepage from "assets/images/homepage.jpg";
-// Vision UI Dashboard React base styles
+//   base styles
 import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 
@@ -49,13 +49,13 @@ import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptio
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
 
+
 function Home() {
   const { gradients } = colors;
   const { cardContent } = gradients;
 
   return (
     <HomeLayout>
-     
       <VuiBox
         py={3}
         sx={{
@@ -64,60 +64,48 @@ function Home() {
           pt: 0,
           pb: 0,
           background: `url(${bgAdmin})`,
-          backgroundSize: "cover",  // Ensures the image covers the entire background
-          backgroundPosition: "center",  // Centers the image
-          backgroundRepeat: "no-repeat",  // Prevents image repetition
-          minHeight: "100vh", 
-           // Ensures full height for the container
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "100vh",
         }}
       >
-         <HomeNavbar />
-        <VuiBox mb={120}>
+        <HomeNavbar />
+        <VuiBox mb={10}>
           <Grid container spacing={3} justifyContent="center" alignItems="center">
-            <Grid item xs={0} md={0} xl={0}>
-              <VuiTypography variant="h1" color="light">
+            <Grid item>
+              <VuiTypography variant="h1" color="light" textAlign="center">
                 V I D A S P H E R A
               </VuiTypography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={3} justifyContent="center" alignItems="center">
-            <Grid item xs={0} md={0} xl={0}>
-              <VuiTypography variant="subtitle1" color="second">
-                Health made simple.
+              <VuiTypography variant="subtitle1" color="light" textAlign="center">
+                Manage your health like a Pro.
               </VuiTypography>
             </Grid>
           </Grid>
-        </VuiBox>
 
-        <VuiBox mb={3} sx={{ pl: 10, pr: 10, pt: 0, pb: 0 }}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={7} sx={{ pl: 100, pr: 0, pt: 0, pb: 0 }}>
-              <GradientBorder
-                minWidth="100%"
-                padding="1px"
-                borderRadius={borders.borderRadius.lg}
-                backgroundImage={radialGradient(
-                  palette.gradients.borderLight.main,
-                  palette.gradients.borderLight.state,
-                  palette.gradients.borderLight.angle
-                )}
-              >
-                <VuiInput type="email" placeholder="Your email..." fontWeight="500" size="large"/>
-              </GradientBorder>
+          {/* Centered column with image placeholder and Get Started button */}
+          <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" mt={5}>
+            <Grid item xs={12} md={8} lg={6}>
+              {/* Image Card Placeholder */}
+              <Card sx={{ p: 3, backgroundColor: cardContent }}>
+                <VuiBox
+                  component="img"
+                  src="https://via.placeholder.com/1000x300" // Replace with the actual image or URL if available
+                  alt="Image Placeholder"
+                  width="100%"
+                  borderRadius={borders.borderRadius.md}
+                />
+              </Card>
             </Grid>
-            <Grid item xs={12} lg={6} xl={5}>
-              <VuiBox mt={0} mb={1}>
-                <VuiButton variant="gradient" color="info" size="large">
-                  Get Started
-                </VuiButton>
-              </VuiBox>
+
+            <Grid item xs={12} md={8} lg={6} mt={3}>
+              {/* Get Started Button */}
+              <VuiButton variant="gradient" color="info" size="large" fullWidth>
+                Get Started
+              </VuiButton>
             </Grid>
           </Grid>
         </VuiBox>
-
-        <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
-          <Grid item xs={12} md={6} lg={4}></Grid>
-        </Grid>
 
         <Footer />
       </VuiBox>

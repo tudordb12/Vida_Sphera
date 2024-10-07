@@ -3,7 +3,7 @@
 // @mui material components
 import { Card, Icon } from "@mui/material";
 
-// Vision UI Dashboard React components
+//   components
 import VuiBox from "components/VuiBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
