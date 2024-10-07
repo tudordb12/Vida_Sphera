@@ -101,6 +101,16 @@ const routes = [
     component: SignUp,
     noCollapse: true,
   },
+  { type: "title", title: "HOMEPAGE", key: "homepage" },
+  {
+    type: "collapse",
+    name: "Home",
+    key: "home",
+    route: "/home",
+    icon: <IoHome size="15px" color="inherit" />,
+    component: Home,
+    noCollapse: true,
+  },
  
 ];
 

@@ -165,7 +165,7 @@ function Dashboard() {
                 title={{ text: "Health Recommendation 2", fontWeight: "regular" }}
                 count={recommendations.recommendation2}
                 percentage={{ color: "success", text: "" }}
-                icon={{ color: "info", component: <IoHeart size="22px" color="white" /> }} // Optional, can be removed
+                icon={{ color: "error", component: <IoHeart size="22px" color="white" /> }} // Optional, can be removed
               />
             </Grid>
 
