@@ -59,7 +59,7 @@ export default function data() {
           <VuiBox display="flex" alignItems="center">
             <AdobeXD size="20px" />
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-              Chakra Vision UI Version
+              Chakra   Version
             </VuiTypography>
           </VuiBox>
         ),

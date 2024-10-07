@@ -5,13 +5,13 @@ import React from "react";
 // @mui components
 import { Card, Stack } from "@mui/material";
 
-// Vision UI Dashboard assets
+//   Dashboard assets
 import balance from "assets/images/billing-background-balance.png";
 import Graph from "assets/images/shapes/graph-billing.svg";
 
 import palette from "assets/theme/base/colors";
 
-// Vision UI Dashboard components
+//   Dashboard components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 

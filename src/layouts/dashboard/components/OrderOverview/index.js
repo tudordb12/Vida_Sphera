@@ -17,7 +17,7 @@ import { SiDropbox } from "react-icons/si";
 import TimelineItem from "examples/Timeline/TimelineItem";
 import AdobeXD from "examples/Icons/AdobeXD";
 
-// Vision UI Dashboard theme imports
+//   Dashboard theme imports
 import palette from "assets/theme/base/colors";
 
 function OrdersOverview() {

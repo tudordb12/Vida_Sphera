@@ -23,7 +23,6 @@ import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
-import Projects from "layouts/dashboard/components/Projects";
 import BMI from "layouts/dashboard/components/BMI";
 import SleepDebt from "layouts/dashboard/components/SleepDebt";
 

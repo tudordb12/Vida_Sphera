@@ -28,14 +28,14 @@ import { FormControl, FormControlLabel, Radio, FormLabel, Box, MenuItem, Select 
 import rgba from "assets/theme/functions/rgba";
 
 
-// Vision UI Dashboard assets
+//   Dashboard assets
 import radialGradient from "assets/theme/functions/radialGradient";
 import palette from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
 
 // Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-import bgSignIn from "assets/images/step.svg";
+import bgSignIn from "assets/images/cardimgfree3.png";
 import bgSignIn2 from "assets/images/backdrop2.jpg";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase"; // Your Firestore instance

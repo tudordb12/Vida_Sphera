@@ -36,7 +36,7 @@ function MasterCard({ number, valid, cvv }) {
           sx={{ width: "100%" }}
         >
           <VuiTypography color="white" variant="lg" fontWeight="bold" mr="auto">
-            Vision UI
+             
           </VuiTypography>
           <RiMastercardFill size="48px" color="white" />
         </VuiBox>

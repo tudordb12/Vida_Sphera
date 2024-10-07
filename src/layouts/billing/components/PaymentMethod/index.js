@@ -17,7 +17,7 @@ import borders from "assets/theme/base/borders";
 // Images
 import colors from "assets/theme/base/colors";
 
-// Vision UI Dashboard component exemples
+//   Dashboard component exemples
 import Mastercard from "examples/Icons/Mastercard";
 import Visa from "examples/Icons/Visa";
 

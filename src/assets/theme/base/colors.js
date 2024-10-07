@@ -1,13 +1,13 @@
 
 
 /**
- * The base colors for the Vision UI Dashboard  Material.
+ * The base colors for the   Dashboard  Material.
  * You can add new color using this file.
- * You can customized the colors for the entire Vision UI Dashboard  Material using thie file.
+ * You can customized the colors for the entire   Dashboard  Material using thie file.
  */
 
 export default {
-  // Vision UI Colors
+  //   Colors
   background: {
     default: "#f8f9fa",
   },

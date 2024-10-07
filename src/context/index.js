@@ -9,7 +9,7 @@ import { createContext, useContext, useReducer } from "react";
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
-// The Vision UI Dashboard  Material main context
+// The   Dashboard  Material main context
 const VisionUI = createContext();
 
 // Setting custom name for the context which is visible on react dev tools

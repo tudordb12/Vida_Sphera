@@ -6,6 +6,6 @@ frontend:
             - npm install --legacy-peer-deps
             - npm run build
     subdomain: coral-available-crocodile
-name: vision-ui-dashboard-react
+name: vida-sphera-platform
 region: eu-central-1
 yamlVersion: 2
