@@ -25,6 +25,7 @@ import Footer from "examples/Footer";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import linearGradient from "assets/theme/functions/linearGradient";
 import bgAdmin from "assets/images/homepage.jpg";
+import logo from "assets/images/logo.svg";
 import homepage from "assets/images/homepage.jpg";
 //   base styles
 import typography from "assets/theme/base/typography";
@@ -80,6 +81,14 @@ function Home() {
         <HomeNavbar />
         <VuiBox mb={10}>
           <Grid container spacing={3} justifyContent="center" alignItems="center">
+          <Grid item>
+                  <VuiBox
+                    component="img"
+                    src={logo} // Add your logo image source here
+                    alt="Logo"
+                    height="60px" // Adjust the height as needed
+                  />
+                </Grid>
             <Grid item>
               <VuiTypography variant="h1" color="light" textAlign="center">
                 V I D A S P H E R A
@@ -94,7 +103,7 @@ function Home() {
           <Grid container spacing={3} justifyContent="center" alignItems="center" direction="column" mt={5}>
             <Grid item xs={12} md={8} lg={6}>
               {/* Image Card Placeholder */}
-              <Card sx={{ p: 3, backgroundColor: "transparent" }}>
+              <Card sx={{ p: 3, mx: 3, backgroundColor: "transparent" }}>
                 <VuiBox
                   component="img"
                   src={homeimage}// Replace with the actual image or URL if available
