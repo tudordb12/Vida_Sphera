@@ -133,6 +133,7 @@ const NewsFeed = () => {
           Your Personal News Flow
           </VuiTypography>
             {/* Dietary News Section */}
+            
             <ArticleSection
               title="Latest Diet and Nutrition News"
               description="Articles tailored to your preferences."

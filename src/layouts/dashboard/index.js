@@ -139,7 +139,7 @@ function Dashboard() {
             mb="12px"
           >
            Your Personalised Tips & Stats
-          </VuiTypography>
+      </VuiTypography>
         <VuiBox mb={3}>
         <VuiBox mb={3}>
           <Grid container spacing="18px">
@@ -201,6 +201,15 @@ function Dashboard() {
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
+        <VuiTypography
+            color="white"
+            variant="body1"
+            fontWeight="normal"
+            mb="12px"
+          >
+          Fitness & Mindfullness Suggestions
+      </VuiTypography>
+      
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6} xl={7}>
               <Card>
