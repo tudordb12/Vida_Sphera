@@ -24,7 +24,7 @@ import colors from "assets/theme/base/colors";
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import BMI from "layouts/dashboard/components/BMI";
-import SleepDebt from "layouts/dashboard/components/SleepDebt";
+import IdealBodyW from "layouts/dashboard/components/IdealBodyW";
 
 // React icons
 import { IoIosRocket } from "react-icons/io";
@@ -81,7 +81,7 @@ function Dashboard() {
               const userData = userDoc.data(); // Extract user data
 
               // Prepare data for ChatGPT recommendations
-              const prompt = `Provide 4 personalized health recommendations, consisting of maximum 2 sentences, 1 about diet, 1 about sleep wellness and 2 more other recommendations for today based on the following user data: 
+              const prompt = `Provide 4 personalized health recommendations, consisting of maximum 2 sentences, 1 about diet, 1 about sleep wellness, 1 related to the current age of the user and 1 allergy related for the day based on the following user data: 
               - Birth year: ${userData.birthYear}
               - Sleep time: ${userData.sleepTime} hours
               - Medical history: ${userData.medicalHistory}
@@ -97,7 +97,7 @@ function Dashboard() {
               const response = await axios.post('https://api.openai.com/v1/chat/completions', {
                 model: 'gpt-3.5-turbo',
                 messages: [{ role: 'user', content: prompt }],
-                max_tokens: 100,
+                max_tokens: 150,
                 temperature: 0.7
               }, {
                 headers: {
@@ -196,7 +196,7 @@ function Dashboard() {
               <BMI />
             </Grid>
             <Grid item xs={12} lg={6} xl={4}>
-              <SleepDebt/>
+              <IdealBodyW/>
             </Grid>
           </Grid>
         </VuiBox>
@@ -209,8 +209,8 @@ function Dashboard() {
                     Unhealthy Sleep Schedule vs Healthy Sleep Schedule
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      +50% improved{" "}
+                    <VuiTypography variant="overline" color="success" fontWeight="bold">
+                      +50% improved Schedule{" "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
                         
                       </VuiTypography>
@@ -246,114 +246,17 @@ function Dashboard() {
                     />
                   </VuiBox>
                   <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Active Users
+                    Proposed Jogging Plan
                   </VuiTypography>
                   <VuiBox display="flex" alignItems="center" mb="40px">
                     <VuiTypography variant="button" color="success" fontWeight="bold">
-                      (+23){" "}
+                      (+23){" more effective "}
                       <VuiTypography variant="button" color="text" fontWeight="regular">
-                        than last week
+                        than last year
                       </VuiTypography>
                     </VuiTypography>
                   </VuiBox>
-                  <Grid container spacing="50px">
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoWallet color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Users
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        32,984
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoIosRocket color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clicks
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,42M
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <FaShoppingCart color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Sales
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,400$
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                    <Grid item xs={6} md={3} lg={3}>
-                      <Stack
-                        direction="row"
-                        spacing={{ sm: "10px", xl: "4px", xxl: "10px" }}
-                        mb="6px"
-                      >
-                        <VuiBox
-                          bgColor="info"
-                          display="flex"
-                          justifyContent="center"
-                          alignItems="center"
-                          sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
-                        >
-                          <IoBuild color="#fff" size="12px" />
-                        </VuiBox>
-                        <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Items
-                        </VuiTypography>
-                      </Stack>
-                      <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        320
-                      </VuiTypography>
-                      <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
-                    </Grid>
-                  </Grid>
+                 
                 </VuiBox>
               </Card>
             </Grid>

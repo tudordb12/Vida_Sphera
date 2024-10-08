@@ -1,8 +1,6 @@
-
-
 export const barChartDataDashboard = [
   {
-    name: "Sales",
-    data: [330, 250, 110, 300, 490, 350, 270, 130, 425],
+    name: "Meters Achieved",
+    data: [400, 450, 500, 600, 550, 500, 650, 700, 800], // Example values in meters
   },
 ];

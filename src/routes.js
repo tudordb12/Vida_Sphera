@@ -1,11 +1,11 @@
 
 import Dashboard from "layouts/dashboard";
-import Billing from "layouts/billing";
 import Home from "layouts/home";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Assistant from "layouts/assistant";
+import NewsFeed from "layouts/feed";
 
 
 import { IoRocketSharp } from "react-icons/io5";
@@ -16,6 +16,7 @@ import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 import { MdAssistant } from "react-icons/md";
+
 
 const routes = [
   {
@@ -31,10 +32,10 @@ const routes = [
   {
     type: "collapse",
     name: "Your Feed",
-    key: "billing",
-    route: "/billing",
+    key: "feed",
+    route: "/feed",
     icon: <BsNewspaper size="15px" color="inherit" />,
-    component: Billing,
+    component: NewsFeed,
     noCollapse: true,
   },
   {

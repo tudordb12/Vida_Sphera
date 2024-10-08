@@ -26,22 +26,17 @@ const MainProfile = () => {
     useEffect(() => {
         const getVisitorIPAndFetchInfo = async () => {
             try {
-                // Get the visitor's IP address
                 const response = await fetch('https://api.ipify.org');
                 const ip = await response.text();
-                
-                // Use the IP to fetch location info
                 const locationResponse = await axios.get(`http://ip-api.com/json/${ip}`);
-                setGeoInfo(locationResponse.data);  // Update state with geo info
-                
-                // Fetch data from ChatGPT
+                setGeoInfo(locationResponse.data);
                 await fetchDataFromChatGPT(locationResponse.data.city, locationResponse.data.country);
             } catch (error) {
                 console.error('Failed to fetch IP or location info', error);
             }
         };
 
-        getVisitorIPAndFetchInfo();  // Call the combined function
+        getVisitorIPAndFetchInfo();
     }, []);
 
     const fetchDataFromChatGPT = async (city, country) => {
@@ -67,7 +62,7 @@ const MainProfile = () => {
         const body = JSON.stringify({
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: prompt }],
-            max_tokens: 150, // Limit the response length
+            max_tokens: 150,
         });
 
         try {
@@ -79,10 +74,8 @@ const MainProfile = () => {
 
             const dataResponse = await response.json();
             const content = dataResponse.choices[0].message.content;
-
-            // Parse the JSON response
             const result = JSON.parse(content);
-            setData(result); // Update the state with fetched data
+            setData(result);
         } catch (error) {
             console.error('Error fetching data from ChatGPT:', error);
         }
@@ -91,11 +84,13 @@ const MainProfile = () => {
     return (
         <Card
             sx={({ breakpoints }) => ({
+                height: '100%', // Allows the card to expand to fill available space
+                maxHeight: '100vh', // Prevents it from exceeding the viewport height
                 [breakpoints.up('xxl')]: {
-                    maxHeight: '400px'
+                    height: 'auto', // Allow auto height for larger screens
                 }
             })}>
-            <VuiBox display='flex' flexDirection='column'>
+            <VuiBox display='flex' flexDirection='column' sx={{ height: '100%' }}>
                 <VuiTypography variant='lg' color='white' fontWeight='bold' mb='6px'>
                     Your Location
                 </VuiTypography>
@@ -176,6 +171,7 @@ const MainProfile = () => {
                                 mx: 'auto !important'
                             }
                         })}>
+                        {/* Water Quality Card */}
                         <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
                             <VuiBox
                                 display='flex'
@@ -202,28 +198,27 @@ const MainProfile = () => {
                                         {data.water_quality}
                                     </VuiTypography>
                                 </VuiBox>
-								
-              <Grid item xs={4}>
-                <VuiBox
-                  bgColor="#0075FF"
-                  color="white"
-                  width="3rem"
-                  height="3rem"
-                  marginLeft="auto"
-                  borderRadius="lg"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  shadow="md"
-                >
-                  <Icon fontSize="small" color="inherit">
-				  	<FaHandHoldingWater size="20px" color="white" /> 
-                  </Icon>
-                </VuiBox>
-              </Grid>
-            
+                                <Grid item xs={4}>
+                                    <VuiBox
+                                        bgColor="#0075FF"
+                                        color="white"
+                                        width="3rem"
+                                        height="3rem"
+                                        marginLeft="auto"
+                                        borderRadius="lg"
+                                        display="flex"
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        shadow="md"
+                                    >
+                                        <Icon fontSize="small" color="inherit">
+                                            <FaHandHoldingWater size="20px" color="white" /> 
+                                        </Icon>
+                                    </VuiBox>
+                                </Grid>
                             </VuiBox>
                         </Grid>
+                        {/* Air Quality Card */}
                         <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
                             <VuiBox
                                 display='flex'
@@ -235,7 +230,7 @@ const MainProfile = () => {
                                 }}>
                                 <VuiBox display='flex' flexDirection='column' mr='auto'>
                                     <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                                        Air Quality Index
+                                        Air Quality Index 
                                     </VuiTypography>
                                     <VuiTypography
                                         color='white'
@@ -249,26 +244,27 @@ const MainProfile = () => {
                                         {data.air_quality}
                                     </VuiTypography>
                                 </VuiBox>
-								<Grid item xs={4}>
-                <VuiBox
-                  bgColor="#0075FF"
-                  color="white"
-                  width="3rem"
-                  height="3rem"
-                  marginLeft="auto"
-                  borderRadius="lg"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  shadow="md"
-                >
-                  <Icon fontSize="small" color="inherit">
-				  	<FaEarthAsia size="20px" color="white" /> 
-                  </Icon>
-                </VuiBox>
-              </Grid>
+                                <Grid item xs={4}>
+                                    <VuiBox
+                                        bgColor="#0075FF"
+                                        color="white"
+                                        width="3rem"
+                                        height="3rem"
+                                        marginLeft="auto"
+                                        borderRadius="lg"
+                                        display="flex"
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        shadow="md"
+                                    >
+                                        <Icon fontSize="small" color="inherit">
+                                            <FaEarthAsia size="20px" color="white" />
+                                        </Icon>
+                                    </VuiBox>
+                                </Grid>
                             </VuiBox>
                         </Grid>
+                        {/* Clinics Card */}
                         <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
                             <VuiBox
                                 display='flex'
@@ -276,12 +272,11 @@ const MainProfile = () => {
                                 alignItems='center'
                                 sx={{
                                     background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
-                                    borderRadius: '20px',
-                                    minHeight: '110px'
+                                    borderRadius: '20px'
                                 }}>
                                 <VuiBox display='flex' flexDirection='column' mr='auto'>
                                     <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                                        Number of Clinics (Aproximate)
+                                        Number of Clinics 
                                     </VuiTypography>
                                     <VuiTypography
                                         color='white'
@@ -295,26 +290,27 @@ const MainProfile = () => {
                                         {data.number_of_clinics}
                                     </VuiTypography>
                                 </VuiBox>
-								<Grid item xs={4}>
-                <VuiBox
-                  bgColor="#0075FF"
-                  color="white"
-                  width="3rem"
-                  height="3rem"
-                  marginLeft="auto"
-                  borderRadius="lg"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  shadow="md"
-                >
-                  <Icon fontSize="small" color="inherit">
-				  	<FaBriefcaseMedical size="20px" color="white" /> 
-                  </Icon>
-                </VuiBox>
-              </Grid>
+                                <Grid item xs={4}>
+                                    <VuiBox
+                                        bgColor="#0075FF"
+                                        color="white"
+                                        width="3rem"
+                                        height="3rem"
+                                        marginLeft="auto"
+                                        borderRadius="lg"
+                                        display="flex"
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        shadow="md"
+                                    >
+                                        <Icon fontSize="small" color="inherit">
+                                            <FaBriefcaseMedical size="20px" color="white" />
+                                        </Icon>
+                                    </VuiBox>
+                                </Grid>
                             </VuiBox>
                         </Grid>
+                        {/* Doctors Card */}
                         <Grid item xs={12} md={5.5} xl={5.8} xxl={5.5}>
                             <VuiBox
                                 display='flex'
@@ -326,7 +322,7 @@ const MainProfile = () => {
                                 }}>
                                 <VuiBox display='flex' flexDirection='column' mr='auto'>
                                     <VuiTypography color='text' variant='caption' fontWeight='medium' mb='2px'>
-                                        Number of Doctors (Aproximate)
+                                        Number of Doctors 
                                     </VuiTypography>
                                     <VuiTypography
                                         color='white'
@@ -340,24 +336,24 @@ const MainProfile = () => {
                                         {data.number_of_doctors}
                                     </VuiTypography>
                                 </VuiBox>
-								<Grid item xs={4}>
-                <VuiBox
-                  bgColor="#0075FF"
-                  color="white"
-                  width="3rem"
-                  height="3rem"
-                  marginLeft="auto"
-                  borderRadius="lg"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  shadow="md"
-                >
-                  <Icon fontSize="small" color="inherit">
-				  	<FaUserDoctor size="20px" color="white" /> 
-                  </Icon>
-                </VuiBox>
-              </Grid>
+                                <Grid item xs={4}>
+                                    <VuiBox
+                                        bgColor="#0075FF"
+                                        color="white"
+                                        width="3rem"
+                                        height="3rem"
+                                        marginLeft="auto"
+                                        borderRadius="lg"
+                                        display="flex"
+                                        justifyContent="center"
+                                        alignItems="center"
+                                        shadow="md"
+                                    >
+                                        <Icon fontSize="small" color="inherit">
+                                            <FaUserDoctor size="20px" color="white" />
+                                        </Icon>
+                                    </VuiBox>
+                                </Grid>
                             </VuiBox>
                         </Grid>
                     </Grid>

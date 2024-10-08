@@ -28,7 +28,6 @@ import profile3 from "assets/images/profile-3.png";
 
 import Welcome from "../profile/components/Welcome/index";
 import MainProfile from "./components/MainProfile";
-import PlatformSettings from "layouts/profile/components/PlatformSettings";
 import axios from 'axios';
 
 function Overview() {
