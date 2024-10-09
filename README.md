@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Screenshots/logo.svg" alt="Vida Sphera Logo" width="200"/>
+</p>
+
 # Vida Sphera
 <p align="center">
   <a href="https://skillicons.dev">
