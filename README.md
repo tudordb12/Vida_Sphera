@@ -1,4 +1,4 @@
-<p align="center">
+<p align="left">
   <img src="Screenshots/logo.svg" alt="Vida Sphera Logo" width="200"/>
 </p>
 
