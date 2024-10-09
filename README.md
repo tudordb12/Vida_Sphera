@@ -25,7 +25,7 @@
 
 Here are some screenshots of the application:
 
-![Home Screen](path/to/home_screen.png)
+![Home Screen](screenshots/home.png)
 *Home Screen*
 
 ![Doctor Listings](path/to/doctor_listings.png)
