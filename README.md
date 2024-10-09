@@ -44,9 +44,6 @@ Here are some screenshots of the application:
 ![Personalised News Feed](Screenshots/feed.png)
 *Personalised News Feed*
 
-![Health Stats Dashboard](Screenshots/dashboard.png)
-*Health Stats Dashboard*
-
 ![Profile & Environmental Data](Screenshots/profile.png)
 *Profile & Environmental Data*
 
