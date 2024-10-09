@@ -118,7 +118,7 @@ Vida Sphera makes use of several external APIs:
 │   ├── assets               # Static files like images, fonts, etc.
 │   ├── App.js               # Main App component
 │   ├── index.js             # Entry point
-│   ├── services             # API services and utility functions
+│   ├── layouts              # The structures of the Pages.
 │   └── ...
 ├── .env                     # Environment variables
 ├── package.json             # Project metadata and dependencies
