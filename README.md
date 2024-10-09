@@ -21,6 +21,19 @@
 - **Interactive Maps**: Displays the user's location and nearby medical facilities on Google Maps.
 
 ---
+## Screenshots
+
+Here are some screenshots of the application:
+
+![Home Screen](path/to/home_screen.png)
+*Home Screen*
+
+![Doctor Listings](path/to/doctor_listings.png)
+*Available Doctors*
+
+![Environmental Data](path/to/environmental_data.png)
+*Environmental Data*
+---
 
 ## 🛠️ **Setup & Installation**
 
