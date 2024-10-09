@@ -28,7 +28,7 @@ const MainProfile = () => {
             try {
                 const response = await fetch('https://api.ipify.org');
                 const ip = await response.text();
-                const locationResponse = await axios.get(`http://ip-api.com/json/${ip}`);
+                const locationResponse = await axios.get(`https://ipwho.is/${ip}`);
                 setGeoInfo(locationResponse.data);
                 await fetchDataFromChatGPT(locationResponse.data.city, locationResponse.data.country);
             } catch (error) {

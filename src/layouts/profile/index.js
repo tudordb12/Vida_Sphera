@@ -43,7 +43,7 @@ function Overview() {
         const response = await fetch('https://api.ipify.org');
         const ip = await response.text();
         // Now use that IP to fetch location info
-        const locationResponse = await axios.get(`http://ip-api.com/json/${ip}`);
+        const locationResponse = await axios.get(`https://ipwho.is/${ip}`);
         setGeoInfo(locationResponse.data);  // Update state with geo info
       } catch (error) {
         console.error('Failed to fetch IP or location info', error);
