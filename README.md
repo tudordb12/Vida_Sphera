@@ -25,14 +25,33 @@
 
 Here are some screenshots of the application:
 
-![Home Screen](Screenshots/home.png)
-*Home Screen*
+![Home Screen](Screenshots/login.png)
+*Authentication Screen*
 
-![Doctor Listings](path/to/doctor_listings.png)
+![Health Stats Dashboard](Screenshots/dashboard.png)
+*Health Stats Dashboard*
+
+![Health Stats Dashboard Mobile](Screenshots/mobile.png)
+*Health Stats Dashboard Mobile*
+
+
+![Personalised News Feed](Screenshots/feed.png)
+*Personalised News Feed*
+
+![Health Stats Dashboard](Screenshots/dashboard.png)
+*Health Stats Dashboard*
+
+![Profile & Environmental Data](Screenshots/profile.png)
+*Profile & Environmental Data*
+
+![Doctor Listings](Screenshots/doctors.png)
 *Available Doctors*
 
-![Environmental Data](path/to/environmental_data.png)
-*Environmental Data*
+![VIDA AI Health Assistant](Screenshots/assistant.png.png)
+*VIDA AI Health Assistant*
+
+
+
 ---
 
 ## 🛠️ **Setup & Installation**
