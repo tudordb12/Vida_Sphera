@@ -11,6 +11,12 @@
 
 ---
 
+<p align="left">
+  <a href="https://vida-sphera.netlify.app/">Visit the Live Web App</a>
+</p>
+
+---
+
 ## 🌟 **Introduction**
 
 **Vida Sphera** is a web application designed to provide users with personalized health-related information based on their geographic location. The app retrieves users' IP addresses to determine their locations and provides insights on air and water quality, as well as information about healthcare professionals nearby.
