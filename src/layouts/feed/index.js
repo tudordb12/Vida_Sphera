@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card, Grid, Icon } from "@mui/material";
+import { Card, Grid, useMediaQuery } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { collection, getFirestore, getDoc, doc, query, where, getDocs } from "firebase/firestore";
 
@@ -11,50 +11,61 @@ import VuiTypography from "components/VuiTypography";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import articleimage from 'assets/images/avatar1.png';
 
-import { FaNewspaper } from "react-icons/fa6";
-
 // Firestore setup
 const db = getFirestore();
 
-// Reusable component to display a section of articles with a scrollable row
-const ArticleSection = ({ title, description, articles }) => (
-  <Grid item xs={12} xl={12}>
-    <Card>
-      <VuiBox display="flex" flexDirection="column" height="100%">
-        <VuiBox display="flex" flexDirection="column" mb="24px">
-          <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
-            {title}
-          </VuiTypography>
-          <VuiTypography color="text" variant="button" fontWeight="regular">
-            {description}
-          </VuiTypography>
-        </VuiBox>
-        <HorizontalScrollContainer>
-          {articles.map((article, index) => (
-            <DefaultProjectCard
-              key={index}
-              image={article.Image || articleimage}
-              label=""
-              title={article.Title}
-              description={article.Description}
-              action={{
-                type: external,
-                route: article.Link,
-                color: "white",
-                label: "READ MORE",
-              }}
-              authors={[]}
-            />
-          ))}
-        </HorizontalScrollContainer>
-      </VuiBox>
-    </Card>
-  </Grid>
-);
+// Reusable component to display a section of articles with responsive layout
+const ArticleSection = ({ title, description, articles }) => {
+  const isMobile = useMediaQuery('(max-width: 600px)');
 
-// Horizontal scrolling wrapper for article rows
-const HorizontalScrollContainer = ({ children }) => (
-  <div style={{ display: 'flex', overflowX: 'auto', gap: '20px', padding: '10px' }}>
+  return (
+    <Grid item xs={12} xl={12}>
+      <Card>
+        <VuiBox display="flex" flexDirection="column" height="100%">
+          <VuiBox display="flex" flexDirection="column" mb="24px">
+            <VuiTypography color="white" variant="lg" fontWeight="bold" mb="6px">
+              {title}
+            </VuiTypography>
+            <VuiTypography color="text" variant="button" fontWeight="regular">
+              {description}
+            </VuiTypography>
+          </VuiBox>
+          <ScrollContainer isMobile={isMobile}>
+            {articles.map((article, index) => (
+              <DefaultProjectCard
+                key={index}
+                image={article.Image || articleimage}
+                label=""
+                title={article.Title}
+                description={article.Description}
+                action={{
+                  type: 'external',
+                  route: article.Link,
+                  color: "white",
+                  label: "READ MORE",
+                }}
+                authors={[]}
+              />
+            ))}
+          </ScrollContainer>
+        </VuiBox>
+      </Card>
+    </Grid>
+  );
+};
+
+// Responsive scroll container that switches to vertical on mobile
+const ScrollContainer = ({ isMobile, children }) => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
+      overflowX: isMobile ? 'hidden' : 'auto',
+      overflowY: isMobile ? 'auto' : 'hidden',
+      gap: '20px',
+      padding: '10px',
+    }}
+  >
     {children}
   </div>
 );
@@ -63,6 +74,8 @@ const NewsFeed = () => {
   const [dietaryArticles, setDietaryArticles] = useState([]);
   const [medicalArticles, setMedicalArticles] = useState([]);
   const [allArticles, setAllArticles] = useState([]);
+
+  const isMobile = useMediaQuery('(max-width: 600px)'); // Detect mobile screens
 
   useEffect(() => {
     const fetchArticlesForUser = async () => {
@@ -86,13 +99,11 @@ const NewsFeed = () => {
     fetchArticlesForUser();
   }, []);
 
-  // Utility function to fetch user document from Firestore
   const getUserDoc = async (email) => {
     const userDoc = await getDoc(doc(db, "users", email));
     return userDoc.exists() ? userDoc.data() : null;
   };
 
-  // Fetch personalized articles based on the field and user preference
   const fetchArticles = async (field, preference, setState) => {
     try {
       let articleQuery = query(collection(db, "articles"), where("Field", "==", field));
@@ -106,7 +117,6 @@ const NewsFeed = () => {
     }
   };
 
-  // Fetch all available articles
   const fetchAllArticles = async () => {
     try {
       const allQuery = query(collection(db, "articles"));
@@ -123,17 +133,20 @@ const NewsFeed = () => {
       <VuiBox py={3}>
         <VuiBox mb={3}>
           <Grid container spacing={3} mb="30px">
-          
-          <VuiTypography
-            color="white"
-            variant="h1"
-            fontWeight="normal"
-            mb="12px"
-          >
-          Your Personal News Flow
-          </VuiTypography>
+            {/* Center-aligned and responsive title with padding */}
+            <VuiBox py={2} px={isMobile ? 2 : 5}> {/* Adding padding around the title */}
+              <VuiTypography
+                color="white"
+                variant={isMobile ? "h3" : "h1"} // Adjust font size based on screen size
+                fontWeight="normal"
+                mb="12px"
+                textAlign="center" // Center align text
+              >
+                Your Personal News Flow
+              </VuiTypography>
+            </VuiBox>
+
             {/* Dietary News Section */}
-            
             <ArticleSection
               title="Latest Diet and Nutrition News"
               description="Articles tailored to your preferences."
