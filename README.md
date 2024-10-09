@@ -31,10 +31,6 @@ Here are some screenshots of the application:
 ![Health Stats Dashboard](Screenshots/dashboard.png)
 *Health Stats Dashboard*
 
-![Health Stats Dashboard Mobile](Screenshots/mobile.png)
-*Health Stats Dashboard Mobile*
-
-
 ![Personalised News Feed](Screenshots/feed.png)
 *Personalised News Feed*
 
