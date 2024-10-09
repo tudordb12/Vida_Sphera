@@ -43,7 +43,7 @@ Here are some screenshots of the application:
 ![Doctor Listings](Screenshots/doctors.png)
 *Available Doctors*
 
-![VIDA AI Health Assistant](Screenshots/assistant.png.png)
+![VIDA AI Health Assistant](Screenshots/assistant.png)
 *VIDA AI Health Assistant*
 
 
