@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="Screenshots/logo2.png" alt="Vida Sphera Logo" width="200"/>
+  <img src="Screenshots/logo2.png" alt="Vida Sphera Logo" width="1000"/>
 </p>
 
 # Vida Sphera
