@@ -105,18 +105,18 @@ function Assistant() {
 
   const handleSend = async () => {
     if (!inputValue) return;
-
+  
     const userMessage = { message: inputValue, sender: "User" };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInputValue("");
     setIsTyping(true);
-
+  
     try {
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {
           model: 'gpt-3.5-turbo',
-          messages: [{ role: 'User', content: inputValue }],
+          messages: [{ role: 'user', content: inputValue }], // Use lowercase 'user'
         },
         {
           headers: {
@@ -125,12 +125,12 @@ function Assistant() {
           },
         }
       );
-
+  
       const botMessage = {
         message: response.data.choices[0].message.content,
         sender: "VIDA Assistant",
       };
-
+  
       setMessages((prevMessages) => [...prevMessages, botMessage]);
     } catch (error) {
       console.error("Error fetching from OpenAI API", error);
